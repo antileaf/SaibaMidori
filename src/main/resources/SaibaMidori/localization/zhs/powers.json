@@ -1,0 +1,172 @@
+{
+  "SaibaMidori:FirePlumesHeartPower": {
+    "NAME": "火羽之心",
+    "DESCRIPTIONS": [
+      "你的攻击牌会额外造成 #b%d 次等同于其耗能的伤害。"
+    ]
+  },
+
+  "SaibaMidori:RainbowPower": {
+    "NAME": "彩虹",
+    "DESCRIPTIONS": [
+      "你的 [#5b9bd5]蓝色[] 牌也视为具有 [#ff7c80]红色[] 和 [#70ad47]绿色[] 。",
+      "你的 [#5b9bd5]蓝色[] 牌也视为具有 [#ff7c80]红色[] 、 [#70ad47]绿色[] 和 [#a5a5a5]黑色[] 。"
+    ]
+  },
+
+  "SaibaMidori:OverloadPower": {
+    "NAME": "疲劳伤害上限提升",
+    "DESCRIPTIONS": [
+      "你的 #y疲劳 伤害上限提升 #b%d 点。"
+    ]
+  },
+
+  "SaibaMidori:MechanicalMindPower": {
+    "NAME": "机械心智",
+    "DESCRIPTIONS": [
+      "在打出一张 [#5b9bd5]蓝色[] 牌后，生成 #b%d 个随机充能球。"
+    ]
+  },
+
+  "SaibaMidori:PaintingsPower": {
+    "NAME": "青空彩绘",
+    "DESCRIPTIONS": [
+      "在每回合的抽牌结束后，获得等同于手牌中 #y颜色 数量的 [E] 。",
+      "在每p回合的抽牌结束后，获得等同于手牌中 #y颜色 数量 #b%d 的 [E] 。"
+    ]
+  },
+
+  "SaibaMidori:ShadePower": {
+    "NAME": "荫蔽",
+    "DESCRIPTIONS": [
+      "你每打出一张牌，就失去 #b%d 层 #y无实体 。"
+    ]
+  },
+
+  "SaibaMidori:CrossInfectionPower": {
+    "NAME": "交叉感染",
+    "DESCRIPTIONS": [
+      "你的 [#ff7c80]红色[] 或 [#70ad47]绿色[] 攻击牌对拥有 #y中毒 的敌人额外造成 #b%d%% 的伤害。"
+    ]
+  },
+
+  "SaibaMidori:PoisonousPaintPower": {
+    "NAME": "毒药颜料",
+    "DESCRIPTIONS": [
+      "每将一张牌染色，就给予随机敌人 #b%d 层 #y中毒 。"
+    ]
+  },
+
+  "SaibaMidori:SilentDisguisePower": {
+    "NAME": "猎手伪装",
+    "DESCRIPTIONS": [
+      "每失去 [E] [E] [E] ，获得 #b%d 层 #y多层护甲 。",
+      "每失去 [E] [E] [E] ，获得 #b%d 层 #y金属化 。"
+    ]
+  },
+
+  "SaibaMidori:FragmentShieldPower": {
+    "NAME": "碎片护盾",
+    "DESCRIPTIONS": [
+      "回合结束时，你的手牌中每有一张 [#5b9bd5]蓝色[] 牌，就获得 #b%d 点 格挡 。"
+    ]
+  },
+
+  "SaibaMidori:SealOfCrowsPower": {
+    "NAME": "群鸦咒缚",
+    "DESCRIPTIONS": [
+      "当你抽到一张 [#a5a5a5]黑色[] 牌时，使所有敌人临时失去 #b%d 点 #y力量 。",
+      "当你抽到一张 [#a5a5a5]黑色[] 或没有 #y颜色 的牌时，使所有敌人临时失去 #b%d 点 #y力量 。"
+    ]
+  },
+
+  "SaibaMidori:HiddenMeaningPower": {
+    "NAME": "暗藏深意",
+    "DESCRIPTIONS": [
+      "如果在回合结束时有未使用的 [E] ，对所有敌人造成 #b%d 点伤害。"
+    ]
+  },
+
+  "SaibaMidori:DefensivePositionPower": {
+    "NAME": "后发制人",
+    "DESCRIPTIONS": [
+      "打出下一张牌后，获得 #b%d 点 格挡 ，并抽一张牌。"
+    ]
+  },
+
+  "SaibaMidori:FutureSightPower": {
+    "NAME": "预知未来",
+    "DESCRIPTIONS": [
+      "你触发的下 #b%d 次 #y疲劳 效果改为获得 [E] 。"
+    ]
+  },
+
+  "SaibaMidori:TyrantSoulPower": {
+    "NAME": "暴君之魂",
+    "DESCRIPTIONS": [
+      "打出一张 [#ff7c80]红色[] 牌后，获得 #b%d 点 #y力量 ，失去 #b%d 点 #y敏捷 。"
+    ]
+  },
+
+  "SaibaMidori:FlightPower": {
+    "NAME": "飞行",
+    "DESCRIPTIONS": [
+      "#b%d 回合内，受到的攻击伤害减半。"
+    ]
+  },
+
+  "SaibaMidori:CrescendoPower": {
+    "NAME": "渐强声浪",
+    "DESCRIPTIONS": [
+      "#y疲劳 将对所有敌人造成伤害。"
+    ]
+  },
+
+  "SaibaMidori:CutinNextTurnPower": {
+    "NAME": "下回合切入",
+    "DESCRIPTIONS": [
+      "下回合只能打出 %s 牌。",
+      "下回合只能打出不为 %s 的牌。"
+    ]
+  },
+
+  "SaibaMidori:CutinPower": {
+    "NAME": "切入",
+    "DESCRIPTIONS": [
+      "本回合只能打出 %s 牌。",
+      "本回合只能打出不为 %s 的牌。",
+      "我在本回合只能打出 %s 牌！",
+      "我在本回合只能打出不为 %s 的牌！"
+    ]
+  },
+
+  "SaibaMidori:IgnitePower": {
+    "NAME": "引燃",
+    "DESCRIPTIONS": [
+      "你的所有 [#ff7c80]红色[] 牌在本场战斗中耗能变为 #b1 ，类型变为攻击牌，效果变为造成 #b14 点伤害。",
+      "你的所有 [#ff7c80]红色[] 牌在本场战斗中耗能变为 #b1 ，类型变为攻击牌，效果变为造成 #b18 点伤害。"
+    ]
+  },
+
+  "SaibaMidori:TimeOutPower": {
+    "NAME": "暂避锋芒",
+    "DESCRIPTIONS": [
+      "你至少拥有 #b%d 点 #y格挡 ，直到你的下个回合开始。"
+    ]
+  },
+
+  "SaibaMidori:DripPower": {
+    "NAME": "滴落",
+    "DESCRIPTIONS": [
+      "下回合开始时，打出一张 %s （给予 #b%d 层 #y中毒 ），目标尽可能为 %s 。"
+    ]
+  },
+
+  "SaibaMidori:ExtraTurnPower": {
+    "NAME": "额外回合",
+    "DESCRIPTIONS": [
+      "本回合结束后，获得一个额外回合。",
+      "#b%d 回合内，在回合结束后，获得一个额外回合。"
+    ]
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "SaibaMidori:PaintingBrush": {
+    "NAME": "画笔",
+    "FLAVOR": "原画师的得力助手。",
+    "DESCRIPTIONS": [
+      "每场战斗的第一回合抽牌改为先抽 #b3 张颜色互不相同的牌，再抽 #b3 张牌。"
+    ]
+  }
+}

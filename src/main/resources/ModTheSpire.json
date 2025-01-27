@@ -1,0 +1,13 @@
+{
+  "modid": "SaibaMidori",
+  "name": "才羽 绿",
+  "author_list": [
+    "才羽绿", "antileaf"
+  ],
+  "description": "千禧年游戏开发部的原画师。",
+  "dependencies": [
+    "basemod", "stslib"
+  ],
+  "version": "0.0.1",
+  "sts_version": "12-06-2019v2"
+}

@@ -1,0 +1,12 @@
+{
+  "shouldOpenTutorial": "重新观看教程",
+  "enableSpellCardSignDisplay": "显示符卡前缀（例如：战符、苍符）",
+  "enableCardTargetIcons": "显示可选目标提示图标",
+  "enableAlternativeMarisaCardImage": "启用魔理沙卡牌异画（仅限通过 “友人之助” 获得的卡牌）",
+  "usePackMasterStyleMarisaCards": "使用卡包大师风格的魔理沙卡牌（重启后生效）",
+  "enableWitchsTeaPartyFeature": "启用 “魔女的茶话会” 特性",
+  "enableShanghaiDollEventForOtherCharacters": "允许其他角色触发上海人偶事件",
+  "enableDebugging": "启用调试功能（重启后生效）",
+  "skinSelectionUnlocked": "解锁皮肤选择",
+  "skinChosen": "当前皮肤："
+}

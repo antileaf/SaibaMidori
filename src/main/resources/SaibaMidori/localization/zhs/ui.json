@@ -1,0 +1,21 @@
+{
+  "SaibaMidori:Fatigue": {
+    "TEXT": [
+      "当前 #y疲劳 伤害为 #b%d 点。"
+    ]
+  },
+
+  "SaibaMidori:CreatingOption": {
+    "TEXT": [
+      "创作",
+      "将牌组中的一张牌染为指定颜色。（不会消耗行动次数。）"
+    ]
+  },
+
+  "SaibaMidori:CampfireCreatingEffect": {
+    "TEXT": [
+      "选择一张牌染色",
+      "将 %s 染色"
+    ]
+  }
+}
