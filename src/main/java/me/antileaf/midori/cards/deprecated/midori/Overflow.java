@@ -1,4 +1,4 @@
-package me.antileaf.midori.cards.deprecated;
+package me.antileaf.midori.cards.deprecated.midori;
 
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.actions.common.HealAction;

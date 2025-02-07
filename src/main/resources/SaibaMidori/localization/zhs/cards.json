@@ -361,8 +361,8 @@
 
   "SaibaMidori:ArtPolish": {
     "NAME": "艺术打磨",
-    "DESCRIPTION": "抽一张 [#ff7c80]红色[] 攻击牌、 [#70ad47]绿色[] 技能牌和 [#5b9bd5]蓝色[] 能力牌。 NL 消耗 。",
-    "UPGRADE_DESCRIPTION": "固有 。 NL 抽一张 [#ff7c80]红色[] 攻击牌、 [#70ad47]绿色[] 技能牌和 [#5b9bd5]蓝色[] 能力牌。 NL 消耗 。"
+    "DESCRIPTION": "抽取所有的 状态牌 和 诅咒 牌，并将它们 *变化 为 *颜料 。 NL 消耗 。",
+    "UPGRADE_DESCRIPTION": "抽取所有的 状态牌 和 诅咒 牌，并将它们 *变化 为 *颜料+ 。 NL 消耗 。"
   },
 
   "SaibaMidori:Paintings": {
@@ -410,7 +410,7 @@
 
   "SaibaMidori:EnergyCycle": {
     "NAME": "能源循环",
-    "DESCRIPTION": "造成 !D! 点伤害。 NL 使你充能球栏位数或 集中 二者中数值较低的那一项增加 !M! 。 NL （如果相同，则随机选择。）"
+    "DESCRIPTION": "造成 !D! 点伤害。 NL 使你充能球栏位数或 集中 二者中数值较低的那一项增加 !M! 。"
   },
 
   "SaibaMidori:Mottle": {
@@ -443,8 +443,8 @@
 
   "SaibaMidori:PaperPlane": {
     "NAME": "折纸飞机",
-    "DESCRIPTION": "不能被打出 。 NL 当这张牌在本场战斗中累计被染色 !M! 次时 消耗 ，并获得1层 midori:飞行 。",
-    "UPGRADE_DESCRIPTION": "保留 。 不能被打出 。 NL 当这张牌在本场战斗中累计被染色 !M! 次时 消耗 ，并获得1层 midori:飞行 。",
+    "DESCRIPTION": "不能被打出 。 NL 当这张牌在本场战斗中累计被染色 !M! 次时 消耗 ，并获得 !midoriM2! 层 midori:飞行 。",
+    "UPGRADE_DESCRIPTION": "保留 。 不能被打出 。 NL 当这张牌在本场战斗中累计被染色 !M! 次时 消耗 ，并获得 !midoriM2! 层 midori:飞行 。",
     "EXTENDED_DESCRIPTION": [
       "（还剩 %d 次。）"
     ]
@@ -458,6 +458,11 @@
   "SaibaMidori:WisdomLight": {
     "NAME": "慧能之光",
     "DESCRIPTION": "对所有敌人造成 !D! 点伤害。 NL 每命中一名敌人，就抽一张牌。"
+  },
+
+  "SaibaMidori:Drill": {
+    "NAME": "钻探",
+    "DESCRIPTION": "造成 !D! 点伤害。 NL 如果本场战斗中打出的上一张牌 midori:颜色 为 [#ff7c80]红[] ，给予 !M! 层 易伤 ；如果这张牌 midori:颜色 为 [#ff7c80]红[] ，给予 !M! 层 易伤 。"
   },
 
   "SaibaMidori:SpreadingSpore": {
@@ -511,21 +516,45 @@
     "DESCRIPTION": "将弃牌堆内的所有牌 midori:染色 为 midori:黄 。 NL 消耗 。"
   },
 
+  "SaibaMidori:Splash": {
+    "NAME": "泼墨",
+    "DESCRIPTION": "丢弃手牌中所有耗能最低的牌。 NL 每丢弃一张，给予 !M! 层 中毒 。 NL 这张牌的 midori:颜色 固定为 [#a5a5a5]黑[] 。",
+    "EXTENDED_DESCRIPTION": [
+      "（给予 !midoriM2! 次 中毒 。）"
+    ]
+  },
+
   "SaibaMidori:ShadowPact": {
     "NAME": "暗影契约",
     "DESCRIPTION": "丢弃 !M! 张牌，抽等量的牌。 NL 移除所有被弃置的牌的 [#a5a5a5]黑色[] ， 生成 等量的 黑暗 充能球。"
   },
 
+  "SaibaMidori:TwistedKnowledge": {
+    "NAME": "扭曲学识",
+    "DESCRIPTION": "获得 !M! 点 力量 。 NL 在你抽到 !midoriM2! 张不为 [#5b9bd5]蓝色[] 的牌后，失去这些 力量 。"
+  },
+
   "SaibaMidori:Communicate": {
     "NAME": "水天一色",
     "DESCRIPTION": "只有在手牌中同时有 [#70ad47]绿色[] 和 [#5b9bd5]蓝色[] 牌时才能打出。 NL 获得 [E] [E] [E] 。",
-    "UPGRADE_DESCRIPTION": "只有在手牌中同时有 [#70ad47]绿色[] 和 [#5b9bd5]蓝色[] 牌时才能打出。 NL 获得 [E] [E] 。"
+    "UPGRADE_DESCRIPTION": "只有在手牌中同时有 [#70ad47]绿色[] 和 [#5b9bd5]蓝色[] 牌时才能打出。 NL 获得 [E] [E] 。",
+    "EXTENDED_DESCRIPTION": [
+      "我的手牌中必须有 #g绿色 和 #b蓝色 牌才能打出。"
+    ]
   },
 
   "SaibaMidori:Continuation": {
     "NAME": "续篇",
     "DESCRIPTION": "去除自身所有的正面和负面状态。 NL 在本回合结束后，获得一个额外回合。 NL 消耗 。",
     "UPGRADE_DESCRIPTION": "去除自身所有的正面和负面状态。 NL 将弃牌堆中的所有牌洗入抽牌堆。 NL 在本回合结束后，获得一个额外回合。 NL 消耗 。"
+  },
+
+  "SaibaMidori:UnlockMystic": {
+    "NAME": "神秘解放",
+    "DESCRIPTION": "从 !M! 张耗能等于 X （不超过3）的能力牌中选择一张，并将其打出。 NL 消耗 。",
+    "EXTENDED_DESCRIPTION": [
+      "选择一张能力牌"
+    ]
   },
 
   "SaibaMidori:TimeOut": {

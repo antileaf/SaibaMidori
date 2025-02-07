@@ -121,7 +121,7 @@ public class HueMechanicsPatch {
 	public static class SpawnInCombatPatch {
 		@SpirePrefixPatch
 		public static void Prefix(AbstractCard card) {
-			HueManager.configureOnSpawnInCombat(card);
+			HueManager.configureOnSpawn(card);
 		}
 	}
 }

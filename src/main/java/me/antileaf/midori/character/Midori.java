@@ -27,6 +27,7 @@ import me.antileaf.midori.hue.Hue;
 import me.antileaf.midori.hue.HueManager;
 import me.antileaf.midori.patches.enums.CardColorEnum;
 import me.antileaf.midori.patches.enums.PlayerEnum;
+import me.antileaf.midori.relics.midori.DrawingBoard;
 import me.antileaf.midori.relics.midori.PaintingBrush;
 import me.antileaf.midori.utils.MidoriHelper;
 import org.apache.logging.log4j.LogManager;
@@ -122,7 +123,7 @@ public class Midori extends CustomPlayer {
 	public ArrayList<String> getStartingRelics() { // 初始遗物
 		ArrayList<String> ret = new ArrayList<>();
 
-		ret.add(PaintingBrush.ID);
+		ret.add(DrawingBoard.ID);
 
 		return ret;
 	}

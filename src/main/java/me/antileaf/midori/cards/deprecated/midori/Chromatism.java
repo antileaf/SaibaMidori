@@ -1,4 +1,4 @@
-package me.antileaf.midori.cards.deprecated;
+package me.antileaf.midori.cards.deprecated.midori;
 
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.actions.defect.IncreaseMaxOrbAction;

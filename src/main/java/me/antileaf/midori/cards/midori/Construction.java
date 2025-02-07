@@ -7,9 +7,12 @@ import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.helpers.CardLibrary;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.orbs.Frost;
+import com.megacrit.cardcrawl.relics.PrismaticShard;
 import me.antileaf.midori.actions.common.ChooseOneCallbackAction;
 import me.antileaf.midori.actions.common.FilteredDrawCardAction;
 import me.antileaf.midori.actions.utils.AnonymousAction;
@@ -50,11 +53,11 @@ public class Construction extends AbstractMidoriCard {
 
 	@Override
 	public void use(AbstractPlayer p, AbstractMonster m) {
-		this.addToBot(new DrawCardAction(this.magicNumber));
+//		this.addToBot(new DrawCardAction(this.magicNumber));
 
 //		if (!this.upgraded)
-			this.addToBot(new FilteredDrawCardAction(this.magicNumber,
-					c -> HueManager.hasHue(c, Hue.SKY), true, null));
+//			this.addToBot(new FilteredDrawCardAction(this.magicNumber,
+//					c -> HueManager.hasHue(c, Hue.SKY), true, null));
 //		else {
 //			ArrayList<AbstractCard> choices = new ArrayList<>();
 //			choices.add(new ContinueChoice());
@@ -73,6 +76,13 @@ public class Construction extends AbstractMidoriCard {
 //					cardStrings.EXTENDED_DESCRIPTION[0],
 //					false));
 //		}
+
+		ArrayList<AbstractCard> choices = CardLibrary.getAllCards().stream()
+				.filter(c -> c.rarity != CardRarity.BASIC &&
+						c.rarity != CardRarity.SPECIAL && c.rarity != CardRarity.CURSE)
+				.filter(c -> p.hasRelic(PrismaticShard.ID) || c.color == p.getCardColor())
+				.filter(c -> c.cost == 2)
+				.collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
 	}
 
 	@Override

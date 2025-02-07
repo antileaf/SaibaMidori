@@ -10,7 +10,7 @@ import com.megacrit.cardcrawl.vfx.cardManip.ShowCardAndAddToHandEffect;
 import javassist.CannotCompileException;
 import javassist.expr.ExprEditor;
 import javassist.expr.MethodCall;
-import me.antileaf.midori.cards.deprecated.SpreadingSpore;
+import me.antileaf.midori.cards.deprecated.midori.SpreadingSpore;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

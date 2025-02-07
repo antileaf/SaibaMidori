@@ -20,7 +20,7 @@ public class Crescendo extends AbstractMidoriCard {
 	public static final String ID = MidoriHelper.makeID(SIMPLE_NAME);
 	private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
 
-	private static final int COST = 1;
+	private static final int COST = 0;
 	private static final int MAGIC = 3;
 	private static final int UPGRADE_PLUS_MAGIC = 2;
 

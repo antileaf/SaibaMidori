@@ -1,4 +1,4 @@
-package me.antileaf.midori.cards.deprecated;
+package me.antileaf.midori.cards.deprecated.midori;
 
 import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.watcher.ChangeStanceAction;

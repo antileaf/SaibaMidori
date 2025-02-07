@@ -23,6 +23,7 @@ public class PaperPlane extends AbstractMidoriCard implements OnPaintedCard {
 
 	private static final int COST = -2;
 	private static final int MAGIC = 3;
+	private static final int MAGIC2 = 2;
 
 	private int counter;
 
@@ -41,6 +42,7 @@ public class PaperPlane extends AbstractMidoriCard implements OnPaintedCard {
 
 		this.magicNumber = this.baseMagicNumber = MAGIC;
 		this.counter = MAGIC;
+		this.secondaryMagicNumber = this.baseSecondaryMagicNumber = MAGIC2;
 	}
 
 	@Override
@@ -82,7 +84,7 @@ public class PaperPlane extends AbstractMidoriCard implements OnPaintedCard {
 				this.addToTop(new ExhaustSpecificCardAction(this, AbstractDungeon.player.discardPile));
 
 			this.addToBot(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player,
-					new FlightPower(1)));
+					new FlightPower(this.secondaryMagicNumber)));
 		}
 		else
 			this.applyPowers();

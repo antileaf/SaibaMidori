@@ -43,17 +43,18 @@ public class TyrantSoulPower extends AbstractMidoriPower {
 	public void onUseCard(AbstractCard card, UseCardAction action) {
 		if (HueManager.hasHue(card, Hue.LAVA)) {
 			this.flash();
+			final int finalAmount = this.amount;
 
 			this.addToBot(new ApplyPowerAction(this.owner, this.owner,
-					new StrengthPower(this.owner, this.amount)));
+					new StrengthPower(this.owner, finalAmount)));
 
 			this.addToBot(new AnonymousAction(() -> {
 				if (!this.owner.hasPower(ArtifactPower.POWER_ID))
 					this.addToTop(new ApplyPowerAction(this.owner, this.owner,
-							new LoseDexterityPower(this.owner, -this.amount)));
+							new GainDexterityPower(finalAmount)));
 
 				this.addToTop(new ApplyPowerAction(this.owner, this.owner,
-						new DexterityPower(this.owner, -this.amount)));
+						new DexterityPower(this.owner, -finalAmount)));
 			}));
 		}
 	}

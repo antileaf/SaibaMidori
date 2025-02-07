@@ -33,7 +33,7 @@ public class Paintings extends AbstractMidoriCard {
 				CardTarget.SELF
 		);
 
-		this.isEthereal = true;
+//		this.isEthereal = true;
 	}
 
 	@Override

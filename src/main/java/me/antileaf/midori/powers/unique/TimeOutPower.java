@@ -45,7 +45,7 @@ public class TimeOutPower extends AbstractMidoriPower implements OnLoseBlockPowe
 
 	@Override
 	public int onLoseBlock(DamageInfo info, int damageAmount) {
-		this.addToBot(new AnonymousAction(() -> {
+		this.addToTop(new AnonymousAction(() -> {
 			if (this.owner.hasPower(NoBlockPower.POWER_ID))
 				return;
 

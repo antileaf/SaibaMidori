@@ -1,4 +1,4 @@
-package me.antileaf.midori.cards.deprecated;
+package me.antileaf.midori.cards.deprecated.midori;
 
 import com.badlogic.gdx.math.MathUtils;
 import com.evacipated.cardcrawl.mod.stslib.cards.interfaces.OnObtainCard;

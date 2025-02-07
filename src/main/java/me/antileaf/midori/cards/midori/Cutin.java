@@ -22,7 +22,7 @@ public class Cutin extends AbstractMidoriCard {
 	private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
 
 	private static final int COST = 2;
-	private static final int DAMAGE = 24;
+	private static final int DAMAGE = 32;
 
 	public Cutin() {
 		super(
@@ -33,7 +33,7 @@ public class Cutin extends AbstractMidoriCard {
 				cardStrings.DESCRIPTION,
 				CardType.ATTACK,
 				CardColorEnum.MIDORI_COLOR,
-				CardRarity.COMMON,
+				CardRarity.UNCOMMON,
 				CardTarget.ENEMY
 		);
 

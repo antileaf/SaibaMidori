@@ -32,7 +32,7 @@ public class GridCardSelectScreenFixPatch {
 		}
 	}
 
-	// 修复了只能选一张和一开始所有卡都是亮的这两个bug
+	// 修复了只能选一张和一开始所有卡都是亮的这两个 bug
 	
 //	@SpirePatch(clz = GridCardSelectScreen.class, method = "callOnOpen")
 //	public static class InitiallyAllGlowingFixPatch {

@@ -11,6 +11,7 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import me.antileaf.midori.actions.hue.PaintAction;
+import me.antileaf.midori.actions.utils.AnonymousAction;
 import me.antileaf.midori.cards.AbstractMidoriCard;
 import me.antileaf.midori.hue.Hue;
 import me.antileaf.midori.hue.HueManager;
@@ -18,6 +19,7 @@ import me.antileaf.midori.patches.enums.CardColorEnum;
 import me.antileaf.midori.utils.MidoriHelper;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class HoldingFire extends AbstractMidoriCard {
@@ -54,24 +56,44 @@ public class HoldingFire extends AbstractMidoriCard {
 
 	@Override
 	public void use(AbstractPlayer p, AbstractMonster m) {
-		this.addToBot(new PaintAction(Hue.POMELO, p.hand.group.stream()
+		ArrayList<AbstractCard> lava = p.hand.group.stream()
+				.filter(c -> c != this)
 				.filter(c -> HueManager.hasHue(c, Hue.LAVA))
-				.toArray(AbstractCard[]::new)));
+				.collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
+
+		this.addToBot(new PaintAction(Hue.POMELO, lava));
 
 		if (!this.upgraded)
-			this.addToBot(new DiscardAction(p, p, BaseMod.MAX_HAND_SIZE, true));
+			this.addToBot(new AnonymousAction(() -> {
+				AbstractCard[] discard = p.hand.group.stream()
+						.filter(c -> !lava.contains(c))
+						.filter(c -> c != this)
+						.toArray(AbstractCard[]::new);
+
+				Arrays.stream(discard)
+						.forEach(c -> {
+							p.hand.moveToDiscardPile(c);
+							c.triggerOnManualDiscard();
+							GameActionManager.incrementDiscard(false);
+						});
+			}));
 		else
 			this.addToBot(new SelectCardsInHandAction(BaseMod.MAX_HAND_SIZE,
 					cardStrings.EXTENDED_DESCRIPTION[2],
 					true,
 					true,
-					c -> !HueManager.hasHue(c, Hue.LAVA),
+					c -> true,
 					(cards) -> {
-				cards.forEach(c -> {
-					p.hand.moveToDiscardPile(c);
-					c.triggerOnManualDiscard();
-					GameActionManager.incrementDiscard(false);
-				});
+				List<AbstractCard> selected = new ArrayList<>(cards);
+
+				this.addToTop(new AnonymousAction(() -> {
+					System.out.println("Selected cards: " + selected);
+					selected.forEach(c -> {
+						p.hand.moveToDiscardPile(c);
+						c.triggerOnManualDiscard();
+						GameActionManager.incrementDiscard(false);
+					});
+				}));
 					}));
 	}
 

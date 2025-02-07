@@ -32,7 +32,7 @@ public class GiftOfLuminance extends AbstractMidoriCard {
 				cardStrings.DESCRIPTION,
 				CardType.SKILL,
 				CardColorEnum.MIDORI_COLOR,
-				CardRarity.UNCOMMON,
+				CardRarity.RARE,
 				CardTarget.NONE
 		);
 

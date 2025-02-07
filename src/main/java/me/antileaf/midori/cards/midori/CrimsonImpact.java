@@ -50,7 +50,7 @@ public class CrimsonImpact extends AbstractMidoriCard {
 
 		super.applyPowersToBlock();
 
-		this.rawDescription += cardStrings.DESCRIPTION + " NL " + cardStrings.EXTENDED_DESCRIPTION[0];
+		this.rawDescription = cardStrings.DESCRIPTION + " NL " + cardStrings.EXTENDED_DESCRIPTION[0];
 		this.initializeDescription();
 	}
 

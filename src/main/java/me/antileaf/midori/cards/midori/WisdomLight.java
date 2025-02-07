@@ -33,7 +33,7 @@ public class WisdomLight extends AbstractMidoriCard {
 				cardStrings.DESCRIPTION,
 				CardType.ATTACK,
 				CardColorEnum.MIDORI_COLOR,
-				CardRarity.UNCOMMON,
+				CardRarity.COMMON,
 				CardTarget.ALL_ENEMY
 		);
 

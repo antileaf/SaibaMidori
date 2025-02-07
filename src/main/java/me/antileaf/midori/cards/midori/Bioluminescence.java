@@ -33,7 +33,7 @@ public class Bioluminescence extends AbstractMidoriCard {
 				cardStrings.DESCRIPTION,
 				CardType.SKILL,
 				CardColorEnum.MIDORI_COLOR,
-				CardRarity.RARE,
+				CardRarity.UNCOMMON,
 				CardTarget.NONE
 		);
 

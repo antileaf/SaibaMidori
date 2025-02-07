@@ -1,4 +1,4 @@
-package me.antileaf.midori.cards.deprecated;
+package me.antileaf.midori.cards.midori;
 
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -7,18 +7,17 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import me.antileaf.midori.cards.AbstractMidoriCard;
-import me.antileaf.midori.cards.midori.Autosuggestion;import me.antileaf.midori.patches.enums.CardColorEnum;
+import me.antileaf.midori.patches.enums.CardColorEnum;
 import me.antileaf.midori.powers.unique.DefensivePositionPower;
 import me.antileaf.midori.utils.MidoriHelper;
 
-@Deprecated
 public class DefensivePosition extends AbstractMidoriCard {
-	public static final String SIMPLE_NAME = Autosuggestion.DefensivePosition.class.getSimpleName();
+	public static final String SIMPLE_NAME = DefensivePosition.class.getSimpleName();
 	public static final String ID = MidoriHelper.makeID(SIMPLE_NAME);
 	private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
 
 	private static final int COST = 0;
-	private static final int BLOCK = 4;
+	private static final int BLOCK = 3;
 	private static final int MAGIC = 1;
 	private static final int UPGRADE_PLUS_BLOCK = 2;
 
@@ -47,7 +46,7 @@ public class DefensivePosition extends AbstractMidoriCard {
 
 	@Override
 	public AbstractCard makeCopy() {
-		return new Autosuggestion.DefensivePosition();
+		return new DefensivePosition();
 	}
 
 	@Override

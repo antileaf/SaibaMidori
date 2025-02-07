@@ -48,11 +48,15 @@ public class ShadowPact extends AbstractMidoriCard {
 	public void use(AbstractPlayer p, AbstractMonster m) {
 		this.addToBot(new DiscardAction(p, p, this.magicNumber, false));
 		this.addToBot(new AnonymousAction(() -> {
-			for (AbstractCard c : AbstractDungeon.handCardSelectScreen.selectedCards.group)
-				if (HueManager.hasHue(c, Hue.INK))
-					this.addToTop(new ChannelAction(new Dark()));
+			MidoriHelper.addActionToBuffer(new DrawCardAction(AbstractDungeon.handCardSelectScreen.selectedCards.group.size()));
 
-			this.addToTop(new DrawCardAction(AbstractDungeon.handCardSelectScreen.selectedCards.group.size()));
+			for (AbstractCard c : AbstractDungeon.handCardSelectScreen.selectedCards.group)
+				if (HueManager.hasHue(c, Hue.INK)) {
+					MidoriHelper.addActionToBuffer(new RemoveHueAction(c));
+					MidoriHelper.addActionToBuffer(new ChannelAction(new Dark()));
+				}
+
+			MidoriHelper.commitBuffer();
 		}));
 	}
 

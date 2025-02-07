@@ -16,7 +16,9 @@ import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.rooms.CampfireUI;
 import com.megacrit.cardcrawl.rooms.RestRoom;
+import com.megacrit.cardcrawl.screens.CardRewardScreen;
 import com.megacrit.cardcrawl.screens.select.GridCardSelectScreen;
+import com.megacrit.cardcrawl.ui.buttons.SkipCardButton;
 import com.megacrit.cardcrawl.ui.campfire.AbstractCampfireOption;
 import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 import com.megacrit.cardcrawl.vfx.UpgradeShineEffect;
@@ -117,6 +119,10 @@ public class CampfireCreatingEffect extends AbstractGameEffect {
 
 			AbstractDungeon.cardRewardScreen.open(choices, null,
 					String.format(uiStrings.TEXT[1], this.card.name));
+			ReflectionHacks.setPrivate(AbstractDungeon.cardRewardScreen, CardRewardScreen.class,
+					"skippable", false);
+			((SkipCardButton) ReflectionHacks.getPrivate(AbstractDungeon.cardRewardScreen, CardRewardScreen.class,
+					"skipButton")).hide();
 		}
 
 		if (this.duration < 0.0F && this.hasPainted) {

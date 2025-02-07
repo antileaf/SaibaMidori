@@ -34,7 +34,7 @@ public class DesperateFighting extends AbstractMidoriCard {
 				cardStrings.DESCRIPTION,
 				CardType.ATTACK,
 				CardColorEnum.MIDORI_COLOR,
-				CardRarity.COMMON,
+				CardRarity.UNCOMMON,
 				CardTarget.ALL_ENEMY
 		);
 

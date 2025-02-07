@@ -12,6 +12,7 @@ import com.megacrit.cardcrawl.random.Random;
 import me.antileaf.midori.cards.AbstractMidoriCard;
 import me.antileaf.midori.cards.interfaces.OnOtherCardRemovedHueCard;
 import me.antileaf.midori.cards.interfaces.OnPaintedCard;
+import me.antileaf.midori.patches.enums.CardColorEnum;
 import me.antileaf.midori.powers.interfaces.OnCardPaintedPower;
 import me.antileaf.midori.powers.interfaces.OnCardRemovedHuePower;
 import me.antileaf.midori.powers.unique.RainbowPower;
@@ -129,7 +130,8 @@ public abstract class HueManager {
 		Hue hue = getFixedHue(card);
 
 		if (hue == null) {
-			if (card instanceof AbstractMidoriCard)
+			if (card instanceof AbstractMidoriCard &&
+					card.color == CardColorEnum.MIDORI_COLOR)
 				hue = getRandomHue();
 			else if (card.color == AbstractCard.CardColor.RED)
 				hue = Hue.LAVA;
@@ -140,35 +142,15 @@ public abstract class HueManager {
 		}
 
 //		HueMechanicsPatch.Fields.hue.set(card, hue);
-		if (hue != null)
+		if (hue != null) {
 			CardModifierManager.addModifier(card, new HueCardModifier(hue));
+//			logger.info("Added hue {} to card {}", hue, card.name);
+		}
 	}
 
 	public static void configureWithCheck(AbstractCard card) {
 		if (getHue(card) == null && !hasAllHues(card))
 			configureOnSpawn(card);
-	}
-
-	public static void configureOnSpawnInCombat(AbstractCard card) {
-		if (getHue(card) != null || hasAllHues(card))
-			return;
-
-		Hue hue = getFixedHue(card);
-
-		if (hue == null) {
-			if (card instanceof AbstractMidoriCard && card.color != AbstractCard.CardColor.COLORLESS)
-				hue = getRandomHueInCombat();
-			else if (card.color == AbstractCard.CardColor.RED)
-				hue = Hue.LAVA;
-			else if (card.color == AbstractCard.CardColor.GREEN)
-				hue = Hue.MINT;
-			else if (card.color == AbstractCard.CardColor.BLUE)
-				hue = Hue.SKY;
-		}
-
-//		HueMechanicsPatch.Fields.hue.set(card, hue);
-		if (hue != null)
-			CardModifierManager.addModifier(card, new HueCardModifier(hue));
 	}
 
 	public static void configureOnCopy(AbstractCard copy, AbstractCard original) {

@@ -42,12 +42,14 @@ public class TimeOut extends AbstractMidoriCard {
 
 	@Override
 	public void use(AbstractPlayer p, AbstractMonster m) {
+		int finalBlock = this.block;
 		this.addToBot(new AnonymousAction(() -> {
-			if (!p.hasPower(NoBlockPower.POWER_ID) && p.currentBlock < this.block)
-				this.addToBot(new GainBlockAction(p, this.block - p.currentBlock));
+			if (!p.hasPower(NoBlockPower.POWER_ID) && p.currentBlock < finalBlock)
+				this.addToBot(new GainBlockAction(p, finalBlock - p.currentBlock));
 		}));
 
-		this.addToBot(new ApplyPowerAction(p, p, new TimeOutPower(this.block)));
+		if (this.block > 0)
+			this.addToBot(new ApplyPowerAction(p, p, new TimeOutPower(this.block)));
 	}
 
 	@Override

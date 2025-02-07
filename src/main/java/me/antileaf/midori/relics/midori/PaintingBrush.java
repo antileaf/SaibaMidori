@@ -1,5 +1,6 @@
 package me.antileaf.midori.relics.midori;
 
+import basemod.AutoAdd;
 import basemod.abstracts.CustomRelic;
 import com.megacrit.cardcrawl.actions.common.RelicAboveCreatureAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -13,6 +14,8 @@ import me.antileaf.midori.utils.MidoriHelper;
 
 import java.util.ArrayList;
 
+@Deprecated
+@AutoAdd.Ignore
 public class PaintingBrush extends CustomRelic {
 	public static final String SIMPLE_NAME = PaintingBrush.class.getSimpleName();
 

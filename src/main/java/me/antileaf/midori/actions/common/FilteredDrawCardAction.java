@@ -66,19 +66,19 @@ public class FilteredDrawCardAction extends AbstractGameAction {
 			return;
 		}
 		if (this.amount <= 0) {
-			endActionWithFollowUp();
+			this.endActionWithFollowUp();
 			return;
 		}
 		int deckSize = this.filteredDrawPile.size();
 		int discardSize = this.filteredDiscardPile.size();
 		if (deckSize + discardSize == 0) {
-			endActionWithFollowUp();
+			this.endActionWithFollowUp();
 			return;
 		}
 
 		if (this.p.hand.size() == BaseMod.MAX_HAND_SIZE) {
 			this.p.createHandIsFullDialog();
-			endActionWithFollowUp();
+			this.endActionWithFollowUp();
 			return;
 		}
 
@@ -89,10 +89,10 @@ public class FilteredDrawCardAction extends AbstractGameAction {
 			}
 			if (this.amount > deckSize) {
 				int temp = this.amount - deckSize;
-				addToTop(new FilteredDrawCardAction(temp, this.filter, false, this.followUpAction));
-				addToTop(new EmptyDeckShuffleAction());
+				this.addToTop(new FilteredDrawCardAction(temp, this.filter, false, this.followUpAction));
+				this.addToTop(new EmptyDeckShuffleAction());
 				if (deckSize != 0) {
-					addToTop(new FilteredDrawCardAction(deckSize, this.filter, false, null));
+					this.addToTop(new FilteredDrawCardAction(deckSize, this.filter, false, null));
 				}
 				this.amount = 0;
 				this.isDone = true;
@@ -140,7 +140,7 @@ public class FilteredDrawCardAction extends AbstractGameAction {
 				}
 			}
 			if (this.amount == 0) {
-				endActionWithFollowUp();
+				this.endActionWithFollowUp();
 			}
 		}
 	}
@@ -148,7 +148,7 @@ public class FilteredDrawCardAction extends AbstractGameAction {
 	private void endActionWithFollowUp() {
 		this.isDone = true;
 		if (this.followUpAction != null) {
-			addToTop(this.followUpAction);
+			this.addToTop(this.followUpAction);
 		}
 	}
 }

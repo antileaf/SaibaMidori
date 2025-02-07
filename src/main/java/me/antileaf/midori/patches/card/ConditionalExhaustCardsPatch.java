@@ -16,9 +16,9 @@ import java.util.Arrays;
 
 @SuppressWarnings("unused")
 public class ConditionalExhaustCardsPatch {
-	@SpirePatch(clz = UseCardAction.class, method = SpirePatch.CONSTRUCTOR,
-			paramtypez = {AbstractCard.class, AbstractCreature.class})
-	public static class UseCardActionPatch {
+//	@SpirePatch(clz = UseCardAction.class, method = SpirePatch.CONSTRUCTOR,
+//			paramtypez = {AbstractCard.class, AbstractCreature.class})
+//	public static class UseCardActionPatch {
 //		private static class Locator extends SpireInsertLocator {
 //			@Override
 //			public int[] Locate(CtBehavior ctBehavior) throws CannotCompileException, PatchingException {
@@ -37,13 +37,25 @@ public class ConditionalExhaustCardsPatch {
 //						new Matcher.MethodCallMatcher(AbstractGameAction.class, "setValues"));
 //			}
 //		}
-		
-		@SpireInsertPatch(rloc = 6)
-		public static void Insert(UseCardAction _inst, AbstractCard card, AbstractCreature target) {
-			if (!(card instanceof ConditionalExhaustCard))
+//
+//		@SpireInsertPatch(locator = Locator.class)
+////		@SpireInsertPatch(rloc = 6)
+//		public static void Insert(UseCardAction _inst, AbstractCard card, AbstractCreature target) {
+//			if (!(card instanceof ConditionalExhaustCard))
+//				return;
+//
+//			_inst.exhaustCard |= ((ConditionalExhaustCard) card).shouldExhaust();
+//		}
+//	}
+
+	@SpirePatch(clz = UseCardAction.class, method = "update")
+	public static class UseCardActionUpdatePatch {
+		@SpirePrefixPatch
+		public static void Prefix(UseCardAction _inst, AbstractCard ___targetCard) {
+			if (!(___targetCard instanceof ConditionalExhaustCard))
 				return;
-			
-			_inst.exhaustCard |= ((ConditionalExhaustCard) card).shouldExhaust();
+
+			_inst.exhaustCard |= ((ConditionalExhaustCard) ___targetCard).shouldExhaust();
 		}
 	}
 }

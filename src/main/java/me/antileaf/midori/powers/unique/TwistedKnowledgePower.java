@@ -2,46 +2,37 @@ package me.antileaf.midori.powers.unique;
 
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.evacipated.cardcrawl.mod.stslib.powers.abstracts.TwoAmountPower;
+import com.evacipated.cardcrawl.mod.stslib.powers.interfaces.NonStackablePower;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
-import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
+import com.megacrit.cardcrawl.actions.common.ReducePowerAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import com.megacrit.cardcrawl.helpers.CardLibrary;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.MetallicizePower;
 import com.megacrit.cardcrawl.powers.PlatedArmorPower;
+import com.megacrit.cardcrawl.powers.StrengthPower;
 import me.antileaf.midori.hue.Hue;
 import me.antileaf.midori.hue.HueManager;
-import me.antileaf.midori.powers.AbstractMidoriPower;
-import me.antileaf.midori.powers.interfaces.OnCardRemovedHuePower;
 import me.antileaf.midori.powers.interfaces.OnLoseEnergyPower;
 import me.antileaf.midori.utils.MidoriHelper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.ArrayList;
+public class TwistedKnowledgePower extends TwoAmountPower implements NonStackablePower {
+	private static final Logger logger = LogManager.getLogger(TwistedKnowledgePower.class.getName());
 
-public class SilentDisguisePower extends TwoAmountPower implements OnLoseEnergyPower {
-	private static final Logger logger = LogManager.getLogger(SilentDisguisePower.class.getName());
-
-	public static final String SIMPLE_NAME = SilentDisguisePower.class.getSimpleName();
+	public static final String SIMPLE_NAME = TwistedKnowledgePower.class.getSimpleName();
 	public static final String POWER_ID = MidoriHelper.makeID(SIMPLE_NAME);
 	private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
 
-	public static final int THRESHOLD = 3;
-
-	private boolean upgraded;
-
-	public SilentDisguisePower(int amount, boolean upgraded) {
-		this.upgraded = upgraded;
-
-		this.name = powerStrings.NAME + (this.upgraded ? "+" : "");
-		this.ID = POWER_ID + (this.upgraded ? "_Upgraded" : "");
+	public TwistedKnowledgePower(int amount, int amount2) {
+		this.name = powerStrings.NAME;
+		this.ID = POWER_ID;
 		this.owner = AbstractDungeon.player;
 		this.amount = amount;
-		this.amount2 = 0;
+		this.amount2 = amount2;
 
 		this.type = PowerType.BUFF;
 		this.updateDescription();
@@ -54,35 +45,17 @@ public class SilentDisguisePower extends TwoAmountPower implements OnLoseEnergyP
 
 	@Override
 	public void updateDescription() {
-		this.description = String.format(powerStrings.DESCRIPTIONS[this.upgraded ? 1 : 0], this.amount);
-	}
-
-//	private AbstractCard getRandomSilentCard() {
-//		ArrayList<AbstractCard> cards = new ArrayList<>();
-//
-//		for (AbstractCard card : CardLibrary.getAllCards()) {
-//			if (card.color == AbstractCard.CardColor.GREEN)
-//				cards.add(card);
-//		}
-//
-//		return cards.get(AbstractDungeon.cardRandomRng.random(cards.size() - 1)).makeCopy();
-//	}
-
-	private void trigger() {
-		this.addToBot(new ApplyPowerAction(this.owner, this.owner,
-				!this.upgraded ?
-						new PlatedArmorPower(this.owner, this.amount) :
-						new MetallicizePower(this.owner, this.amount)));
+		this.description = String.format(powerStrings.DESCRIPTIONS[0], this.amount, this.amount2);
 	}
 
 	@Override
-	public void onLoseEnergy(int amount, boolean startOfTurn) {
-		this.amount2 += amount;
+	public void onCardDraw(AbstractCard card) {
+		if (!HueManager.hasHue(card, Hue.SKY))
+			this.addToTop(new ReducePowerAction(this.owner, this.owner, this, 1));
+	}
 
-		while (this.amount2 >= THRESHOLD) {
-			this.flash();
-			this.trigger();
-			this.amount2 -= THRESHOLD;
-		}
+	@Override
+	public void onRemove() {
+		this.addToTop(new ApplyPowerAction(this.owner, this.owner, new StrengthPower(this.owner, -this.amount2)));
 	}
 }

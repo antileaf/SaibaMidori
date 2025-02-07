@@ -32,7 +32,7 @@
     "NAME": "青空彩绘",
     "DESCRIPTIONS": [
       "在每回合的抽牌结束后，获得等同于手牌中 #y颜色 数量的 [E] 。",
-      "在每p回合的抽牌结束后，获得等同于手牌中 #y颜色 数量 #b%d 的 [E] 。"
+      "在每回合的抽牌结束后，获得等同于手牌中 #y颜色 数量 #b%d 倍的 [E] 。"
     ]
   },
 
@@ -104,7 +104,14 @@
   "SaibaMidori:TyrantSoulPower": {
     "NAME": "暴君之魂",
     "DESCRIPTIONS": [
-      "打出一张 [#ff7c80]红色[] 牌后，获得 #b%d 点 #y力量 ，失去 #b%d 点 #y敏捷 。"
+      "打出一张 [#ff7c80]红色[] 牌后，获得 #b%d 点 #y力量 ，临时失去 #b%d 点 #y敏捷 。"
+    ]
+  },
+
+  "SaibaMidori:GainDexterityPower": {
+    "NAME": "获得敏捷",
+    "DESCRIPTIONS": [
+      "回合结束时，获得 #b%d 点 #y敏捷 。"
     ]
   },
 
@@ -167,6 +174,13 @@
     "DESCRIPTIONS": [
       "本回合结束后，获得一个额外回合。",
       "#b%d 回合内，在回合结束后，获得一个额外回合。"
+    ]
+  },
+
+  "SaibaMidori:TwistedKnowledgePower": {
+    "NAME": "扭曲学识",
+    "DESCRIPTIONS": [
+      "抽到 #b%d 张不为 [#5b9bd5]蓝色[] 的牌后，失去 #b%d 点 #y力量 。"
     ]
   }
 }

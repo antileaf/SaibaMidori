@@ -2,16 +2,22 @@ package me.antileaf.midori.cards.midori;
 
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.actions.common.GainEnergyAction;
+import com.megacrit.cardcrawl.actions.utility.NewQueueCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.helpers.CardLibrary;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.relics.ChemicalX;
+import me.antileaf.midori.actions.common.ChooseOneCallbackAction;
 import me.antileaf.midori.actions.utils.AnonymousAction;
 import me.antileaf.midori.cards.AbstractMidoriCard;
 import me.antileaf.midori.patches.enums.CardColorEnum;
 import me.antileaf.midori.utils.MidoriHelper;
+
+import java.util.ArrayList;
 
 public class UnlockMystic extends AbstractMidoriCard {
 	public static final String SIMPLE_NAME = UnlockMystic.class.getSimpleName();
@@ -19,6 +25,8 @@ public class UnlockMystic extends AbstractMidoriCard {
 	private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
 
 	private static final int COST = -1;
+	private static final int MAGIC = 3;
+	private static final int UPGRADE_PLUS_MAGIC = 1;
 
 	public UnlockMystic() {
 		super(
@@ -29,34 +37,57 @@ public class UnlockMystic extends AbstractMidoriCard {
 				cardStrings.DESCRIPTION,
 				CardType.SKILL,
 				CardColorEnum.MIDORI_COLOR,
-				CardRarity.RARE,
+				CardRarity.UNCOMMON,
 				CardTarget.NONE
 		);
 
+		this.magicNumber = this.baseMagicNumber = MAGIC;
 		this.exhaust = true;
 	}
 
 	@Override
 	public void use(AbstractPlayer p, AbstractMonster m) {
 		this.addToBot(new AnonymousAction(() -> {
-			int amount = this.energyOnUse + (this.upgraded ? 1 : 0);
+			int amount = this.energyOnUse;
 
 			if (p.hasRelic(ChemicalX.ID)) {
 				amount += ChemicalX.BOOST;
 				p.getRelic(ChemicalX.ID).flash();
 			}
 
-			if (amount > 0) {
-				if (!this.freeToPlayOnce)
-					p.energy.use(this.energyOnUse);
+//			int energyCost = this.energyOnUse;
+//			if (amount > 3)
+//				energyCost -= amount - 3;
 
-				this.addToBot(new DrawCardAction(amount, new AnonymousAction(() -> {
-					this.addToTop(new GainEnergyAction(DrawCardAction.drawnCards.stream()
-							.mapToInt(card -> card.costForTurn)
-							.filter(cost -> cost > 0)
-							.sum()));
-				})));
+			amount = Math.min(amount, 3);
+
+			if (!this.freeToPlayOnce)
+				p.energy.use(this.energyOnUse);
+
+			int finalAmount = amount;
+			ArrayList<AbstractCard> cards = CardLibrary.getAllCards().stream()
+					.filter(card -> card.type == CardType.POWER)
+					.filter(card -> card.rarity != CardRarity.SPECIAL)
+					.filter(card -> card.cost == finalAmount)
+					.collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
+
+			ArrayList<AbstractCard> choices = new ArrayList<>();
+			for (int i = 0; i < this.magicNumber; i++) {
+				if (cards.isEmpty())
+					break;
+
+				int index = AbstractDungeon.cardRandomRng.random(cards.size() - 1);
+				choices.add(cards.get(index).makeCopy());
+				cards.remove(index);
 			}
+
+			this.addToTop(new ChooseOneCallbackAction(choices,
+					card -> {
+				this.addToTop(new NewQueueCardAction(card, true, false, true));
+					},
+					cardStrings.EXTENDED_DESCRIPTION[0],
+					true
+			));
 		}));
 	}
 
@@ -69,9 +100,7 @@ public class UnlockMystic extends AbstractMidoriCard {
 	public void upgrade() {
 		if (!this.upgraded) {
 			this.upgradeName();
-
-			this.rawDescription = cardStrings.UPGRADE_DESCRIPTION;
-
+			this.upgradeMagicNumber(UPGRADE_PLUS_MAGIC);
 			this.initializeDescription();
 		}
 	}

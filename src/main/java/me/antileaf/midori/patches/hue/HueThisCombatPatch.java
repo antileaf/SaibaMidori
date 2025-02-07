@@ -9,15 +9,17 @@ import javassist.CtBehavior;
 import me.antileaf.midori.hue.Hue;
 import me.antileaf.midori.hue.HueManager;
 
+import java.util.ArrayList;
+
 @SuppressWarnings("unused")
-public class LastHueThisCombatPatch {
-	public static Hue get() {
-		return Fields.lastHueThisCombat.get(AbstractDungeon.actionManager);
+public class HueThisCombatPatch {
+	public static ArrayList<Hue> get() {
+		return Fields.hueThisCombat.get(AbstractDungeon.actionManager);
 	}
 
 	@SpirePatch(clz = GameActionManager.class, method = SpirePatch.CLASS)
 	public static class Fields {
-		public static SpireField<Hue> lastHueThisCombat = new SpireField<>(() -> null);
+		public static SpireField<ArrayList<Hue>> hueThisCombat = new SpireField<>(ArrayList::new);
 	}
 
 	@SpirePatch(clz = GameActionManager.class, method = "getNextAction",
@@ -33,15 +35,14 @@ public class LastHueThisCombatPatch {
 
 		@SpireInsertPatch(locator = Locator.class)
 		public static void Insert(GameActionManager _inst) {
-			Fields.lastHueThisCombat.set(_inst,
-					HueManager.getHue(_inst.cardQueue.get(0).card));
+			Fields.hueThisCombat.get(_inst).add(HueManager.getHue(_inst.cardQueue.get(0).card));
 		}
 	}
 
 	@SpirePatch(clz = GameActionManager.class, method = "clear")
 	public static class ClearPatch {
 		public static void Postfix(GameActionManager _inst) {
-			Fields.lastHueThisCombat.set(_inst, null);
+			Fields.hueThisCombat.get(_inst).clear();
 		}
 	}
 }

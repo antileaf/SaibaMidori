@@ -40,11 +40,6 @@ public class HueCardModifier extends AbstractCardModifier {
 	}
 
 	@Override
-	public boolean isInherent(AbstractCard card) {
-		return HueManager.getFixedHue(card) != null;
-	}
-
-	@Override
 	public List<TooltipInfo> additionalTooltips(AbstractCard card) {
 		if (cardModifierStrings.EXTENDED_DESCRIPTION[this.hue.ordinal() * 2 + 1].isEmpty())
 			return null;

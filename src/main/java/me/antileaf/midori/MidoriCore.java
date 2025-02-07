@@ -2,6 +2,7 @@ package me.antileaf.midori;
 
 import basemod.AutoAdd;
 import basemod.BaseMod;
+import basemod.ReflectionHacks;
 import basemod.abstracts.CustomRelic;
 import basemod.abstracts.CustomSavable;
 import basemod.abstracts.DynamicVariable;
@@ -10,7 +11,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.compression.lzma.Base;
 import com.evacipated.cardcrawl.mod.stslib.icons.CustomIconHelper;
+import com.evacipated.cardcrawl.modthespire.Loader;
+import com.evacipated.cardcrawl.modthespire.ModInfo;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
+import com.evacipated.cardcrawl.modthespire.steam.SteamSearch;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.megacrit.cardcrawl.localization.*;
@@ -28,10 +32,13 @@ import me.antileaf.midori.save.SaveData;
 import me.antileaf.midori.strings.CardModifierStrings;
 import me.antileaf.midori.utils.MidoriAudioMaster;
 import me.antileaf.midori.utils.MidoriHelper;
+import me.antileaf.midori.utils.WorkshopHelper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 @SpireInitializer
@@ -193,6 +200,10 @@ public class MidoriCore implements
 	@Override
 	public void receivePostInitialize() {
 		HueRenderHelper.initialize();
+
+		logger.info("basemod: {}", WorkshopHelper.isModInWorkshop("basemod"));
+		logger.info("tuner: {}", WorkshopHelper.isModInWorkshop("Blue archive Hina mod"));
+		logger.info("SaibaMidori: {}", WorkshopHelper.isModInWorkshop("SaibaMidori"));
 	}
 
 	@Override
