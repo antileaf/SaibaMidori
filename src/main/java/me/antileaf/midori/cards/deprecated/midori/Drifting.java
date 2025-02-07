@@ -1,6 +1,5 @@
-package me.antileaf.midori.cards.midori;
+package me.antileaf.midori.cards.deprecated;
 
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -9,14 +8,11 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.StrengthPower;
-import com.megacrit.cardcrawl.powers.VulnerablePower;
-import com.megacrit.cardcrawl.powers.WeakPower;
 import me.antileaf.midori.cards.AbstractMidoriCard;
-import me.antileaf.midori.hue.Hue;
-import me.antileaf.midori.hue.HueManager;
 import me.antileaf.midori.patches.enums.CardColorEnum;
 import me.antileaf.midori.utils.MidoriHelper;
 
+@Deprecated
 public class Drifting extends AbstractMidoriCard {
 	public static final String SIMPLE_NAME = Drifting.class.getSimpleName();
 	public static final String ID = MidoriHelper.makeID(SIMPLE_NAME);

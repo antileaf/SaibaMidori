@@ -1,8 +1,6 @@
-package me.antileaf.midori.cards.midori;
+package me.antileaf.midori.cards.deprecated;
 
-import basemod.helpers.TooltipInfo;
 import com.badlogic.gdx.graphics.Color;
-import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.actions.watcher.ChangeStanceAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -20,9 +18,7 @@ import me.antileaf.midori.hue.HueManager;
 import me.antileaf.midori.patches.enums.CardColorEnum;
 import me.antileaf.midori.utils.MidoriHelper;
 
-import java.util.ArrayList;
-import java.util.List;
-
+@Deprecated
 public class Phase extends AbstractMidoriCard implements ConditionalExhaustCard {
 	public static final String SIMPLE_NAME = Phase.class.getSimpleName();
 	public static final String ID = MidoriHelper.makeID(SIMPLE_NAME);

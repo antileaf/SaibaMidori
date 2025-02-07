@@ -1,7 +1,6 @@
-package me.antileaf.midori.cards.midori;
+package me.antileaf.midori.cards.deprecated;
 
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
-import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.actions.defect.IncreaseMaxOrbAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -9,7 +8,6 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.orbs.Frost;
 import me.antileaf.midori.cards.AbstractMidoriCard;
 import me.antileaf.midori.hue.Hue;
 import me.antileaf.midori.hue.HueManager;
@@ -19,6 +17,7 @@ import me.antileaf.midori.utils.MidoriHelper;
 import java.util.HashSet;
 import java.util.Set;
 
+@Deprecated
 public class Chromatism extends AbstractMidoriCard {
 	public static final String SIMPLE_NAME = Chromatism.class.getSimpleName();
 	public static final String ID = MidoriHelper.makeID(SIMPLE_NAME);

@@ -1,7 +1,5 @@
-package me.antileaf.midori.cards.midori;
+package me.antileaf.midori.cards.deprecated;
 
-import basemod.AutoAdd;
-import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInDrawPileAction;
 import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -17,6 +15,7 @@ import me.antileaf.midori.cards.AbstractMidoriCard;
 import me.antileaf.midori.patches.enums.CardColorEnum;
 import me.antileaf.midori.utils.MidoriHelper;
 
+@Deprecated
 public class VoidEmaki extends AbstractMidoriCard {
 	public static final String SIMPLE_NAME = VoidEmaki.class.getSimpleName();
 	public static final String ID = MidoriHelper.makeID(SIMPLE_NAME);

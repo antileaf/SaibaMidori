@@ -1,9 +1,8 @@
-package me.antileaf.midori.cards.midori;
+package me.antileaf.midori.cards.deprecated;
 
 import com.badlogic.gdx.math.MathUtils;
 import com.evacipated.cardcrawl.mod.stslib.cards.interfaces.OnObtainCard;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
-import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -11,7 +10,6 @@ import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.orbs.Frost;
 import com.megacrit.cardcrawl.vfx.UpgradeShineEffect;
 import com.megacrit.cardcrawl.vfx.cardManip.ShowCardBrieflyEffect;
 import me.antileaf.midori.cards.AbstractMidoriCard;
@@ -20,6 +18,7 @@ import me.antileaf.midori.utils.MidoriHelper;
 
 import java.util.ArrayList;
 
+@Deprecated
 public class Optimize extends AbstractMidoriCard implements OnObtainCard {
 	public static final String SIMPLE_NAME = Optimize.class.getSimpleName();
 	public static final String ID = MidoriHelper.makeID(SIMPLE_NAME);
