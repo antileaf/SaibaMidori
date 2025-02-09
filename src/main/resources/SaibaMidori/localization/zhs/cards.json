@@ -47,9 +47,10 @@
     "DESCRIPTION": "给予所有敌人 !M! 层 虚弱 。 NL 如果这张牌 midori:颜色 为 [#ff7c80]红[] ，改为给予 易伤 。"
   },
 
-  "SaibaMidori:Resonance": {
+  "SaibaMidori:Sympathy": {
     "NAME": "共鸣",
-    "DESCRIPTION": "抽 !M! 张攻击牌。 NL 如果这些牌的 midori:颜色 均为 [#ff7c80]红[] ，对所有敌人造成 !D! 点伤害。"
+    "DESCRIPTION": "抽 !M! 张攻击牌。 NL 如果这些牌的 midori:颜色 均为 [#ff7c80]红[] ，获得 !M! 点 力量 。",
+    "UPGRADE_DESCRIPTION": "抽 !M! 张攻击牌。 NL 如果这些牌的 midori:颜色 均为 [#ff7c80]红[] ，将它们在本场战斗中 升级 ，并获得 !M! 点 力量 。"
   },
 
   "SaibaMidori:RapidInfection": {
@@ -157,7 +158,7 @@
 
   "SaibaMidori:ChillVibes": {
     "NAME": "清冷音韵",
-    "DESCRIPTION": "获得 !B! 点 格挡 !M! 次。 NL 生成 一个 冰霜 充能球。"
+    "DESCRIPTION": "获得 !B! 点 格挡 !M! 次。 NL 获得 !M! 层 *多层护甲 。"
   },
 
   "SaibaMidori:DefensivePosition": {
@@ -241,10 +242,10 @@
 
   "SaibaMidori:Construction": {
     "NAME": "构造",
-    "DESCRIPTION": "抽 !M! 张牌，再抽一张 [#5b9bd5]蓝色[] 牌。",
-    "UPGRADE_DESCRIPTION": "抽一张牌，然后选择：再抽一张 [#5b9bd5]蓝色[] 牌；或者获得 [E] 。",
+    "DESCRIPTION": "从 !M! 张耗能为 2 的本职业牌中选择一张，将其加入手牌，并 midori:染色 为 [#5b9bd5]蓝[] 。",
+    "UPGRADE_DESCRIPTION": "从 !M! 张耗能为 2 的本职业牌中选择一张，将其加入手牌，并 midori:染色 为 [#5b9bd5]蓝[] 。 NL 能够使用 !stslib:persist! 次。",
     "EXTENDED_DESCRIPTION": [
-      "选择一项"
+      "选择一张牌"
     ]
   },
 
@@ -367,8 +368,8 @@
 
   "SaibaMidori:Paintings": {
     "NAME": "青空彩绘",
-    "DESCRIPTION": "虚无 。 NL 在每回合的抽牌结束后，获得等同于手牌中 midori:颜色 数量的 [E] 。",
-    "UPGRADE_DESCRIPTION": "在每回合的抽牌结束后，获得等同于手牌中 midori:颜色 数量的 [E] 。"
+    "DESCRIPTION": "在每回合的抽牌结束后，获得等同于手牌中 midori:颜色 数量的 [E] 。",
+    "UPGRADE_DESCRIPTION": "在每回合的抽牌结束后，获得等同于手牌中 midori:颜色 数量的 [E] 。 NL 如果在回合结束时手牌中有七种不同 midori:颜色 的牌，获得本场战斗的胜利。"
   },
 
   "SaibaMidori:Shade": {
@@ -396,7 +397,7 @@
     "UPGRADE_DESCRIPTION": "造成 !D! 点伤害。 NL 将最左与最右侧的手牌染色为 [#ed7d31]橙[] 。",
     "EXTENDED_DESCRIPTION": [
       "[#ed7d31]橙色[]",
-      "一种特殊的颜色，当 [#ed7d31]橙色[] 覆盖了某张卡牌的其它颜色时，获得 3 点 #y活力 。"
+      "一种特殊的颜色，当 [#ed7d31]橙色[] 覆盖了某张卡牌的其它颜色时，获得 #b4 点 #y活力 。"
     ]
   },
 
@@ -497,7 +498,7 @@
     "UPGRADE_DESCRIPTION": "将手牌中的所有 [#ff7c80]红色[] 牌 midori:染色 为 [#ed7d31]橙[] 。 NL 丢弃任意张手牌。",
     "EXTENDED_DESCRIPTION": [
       "[#ed7d31]橙色[]",
-      "一种特殊的颜色，当 [#ed7d31]橙色[] 覆盖了某张卡牌的其它颜色时，获得 3 点 #y活力 。",
+      "一种特殊的颜色，当 [#ed7d31]橙色[] 覆盖了某张卡牌的其它颜色时，获得 #b4 点 #y活力 。",
       "丢弃"
     ]
   },
@@ -525,8 +526,11 @@
   },
 
   "SaibaMidori:ShadowPact": {
-    "NAME": "暗影契约",
-    "DESCRIPTION": "丢弃 !M! 张牌，抽等量的牌。 NL 移除所有被弃置的牌的 [#a5a5a5]黑色[] ， 生成 等量的 黑暗 充能球。"
+    "NAME": "冥界交易",
+    "DESCRIPTION": "丢弃 !M! 张牌，抽等量的牌。 NL 如果被丢弃的牌中有 [#a5a5a5]黑色[] 牌，获得 [E] 。",
+    "EXTENDED_DESCRIPTION": [
+      "丢弃"
+    ]
   },
 
   "SaibaMidori:TwistedKnowledge": {
@@ -536,10 +540,11 @@
 
   "SaibaMidori:Communicate": {
     "NAME": "水天一色",
-    "DESCRIPTION": "只有在手牌中同时有 [#70ad47]绿色[] 和 [#5b9bd5]蓝色[] 牌时才能打出。 NL 获得 [E] [E] [E] 。",
-    "UPGRADE_DESCRIPTION": "只有在手牌中同时有 [#70ad47]绿色[] 和 [#5b9bd5]蓝色[] 牌时才能打出。 NL 获得 [E] [E] 。",
+    "DESCRIPTION": "只有在手牌中有且仅有 [#70ad47]绿色[] 和 [#5b9bd5]蓝色[] 牌时才能打出。 NL 获得 [E] [E] [E] 。",
+    "UPGRADE_DESCRIPTION": "只有在手牌中同时有 [#70ad47]绿色[] 和 [#5b9bd5]蓝色[] 牌时才能打出。 NL 获得 [E] [E] [E] 。",
     "EXTENDED_DESCRIPTION": [
-      "我的手牌中必须有 #g绿色 和 #b蓝色 牌才能打出。"
+      "我的手牌中必须有 #g绿色 和 #b蓝色 牌才能打出。",
+      "我的手牌中还包含其它颜色的牌。"
     ]
   },
 
@@ -560,6 +565,35 @@
   "SaibaMidori:TimeOut": {
     "NAME": "暂避锋芒",
     "DESCRIPTION": "你至少拥有 !B! 点 格挡 ，直到你的下个回合开始。 NL 消耗 。"
+  },
+
+  "SaibaMidori:Simulation": {
+    "NAME": "模拟",
+    "DESCRIPTION": "获得 !B! 点 格挡 。 NL 选择一张与这张牌 midori:颜色 相同的手牌打出。",
+    "EXTENDED_DESCRIPTION": [
+      "打出"
+    ]
+  },
+
+  "SaibaMidori:Scatter": {
+    "NAME": "零落",
+    "DESCRIPTION": "获得 !B! 点 格挡 。 NL 你每打出一张 [#70ad47]绿色[] 牌，这张牌在下次被打出之前的耗能就降低1 [E] 。"
+  },
+
+  "SaibaMidori:Resonance": {
+    "NAME": "共振",
+    "DESCRIPTION": "获得 !B! 点 格挡 。 NL 将手牌中的所有 [#5b9bd5]蓝色[] 牌的耗能在本场战斗中调整为1。"
+  },
+
+  "SaibaMidori:Cutting": {
+    "NAME": "裁切",
+    "DESCRIPTION": "获得 !B! 点 格挡 。 NL 造成 !D! 点伤害。 NL 将这张牌分开，并将分开后的两张牌加入手牌。"
+  },
+
+  "SaibaMidori:Flicker": {
+    "NAME": "摇曳",
+    "DESCRIPTION": "将这张牌置入手牌最右侧，将途中的所有牌 midori:染色 为 [#70ad47]绿[] ，并将它们在本场战斗中 升级 。",
+    "UPGRADE_DESCRIPTION": "保留 。 NL 将这张牌置入手牌最右侧，将途中的所有牌 midori:染色 为 [#70ad47]绿[] ，并将它们在本场战斗中 升级 。"
   },
 
   "SaibaMidori:PlaceHolder": {
@@ -596,6 +630,16 @@
       "阳光",
       "染为黄色。"
     ]
+  },
+
+  "SaibaMidori:Fragment_Attack": {
+    "NAME": "碎片 (攻击)",
+    "DESCRIPTION": "造成 !D! 点伤害。"
+  },
+
+  "SaibaMidori:Fragment_Defend": {
+    "NAME": "碎片 (防御)",
+    "DESCRIPTION": "获得 !B! 点 格挡 。"
   },
 
   "SaibaMidori:LeftChoice": {

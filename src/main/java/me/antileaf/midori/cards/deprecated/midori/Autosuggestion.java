@@ -1,7 +1,6 @@
-package me.antileaf.midori.cards.midori;
+package me.antileaf.midori.cards.deprecated.midori;
 
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
-import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -14,14 +13,15 @@ import com.megacrit.cardcrawl.relics.ChemicalX;
 import me.antileaf.midori.actions.common.ChooseOneCallbackAction;
 import me.antileaf.midori.actions.utils.AnonymousAction;
 import me.antileaf.midori.cards.AbstractMidoriCard;
-import me.antileaf.midori.cards.colorless.GoWithGreen;
-import me.antileaf.midori.cards.colorless.GoWithRed;
+import me.antileaf.midori.cards.deprecated.colorless.GoWithGreen;
+import me.antileaf.midori.cards.deprecated.colorless.GoWithRed;
 import me.antileaf.midori.hue.Hue;
 import me.antileaf.midori.patches.enums.CardColorEnum;
 import me.antileaf.midori.utils.MidoriHelper;
 
 import java.util.ArrayList;
 
+@Deprecated
 public class Autosuggestion extends AbstractMidoriCard {
 	public static final String SIMPLE_NAME = Autosuggestion.class.getSimpleName();
 	public static final String ID = MidoriHelper.makeID(SIMPLE_NAME);

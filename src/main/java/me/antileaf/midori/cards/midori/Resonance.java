@@ -1,18 +1,11 @@
 package me.antileaf.midori.cards.midori;
 
-import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
-import com.megacrit.cardcrawl.actions.common.DamageAllEnemiesAction;
-import com.megacrit.cardcrawl.actions.common.DrawCardAction;
+import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.powers.VulnerablePower;
-import com.megacrit.cardcrawl.powers.WeakPower;
-import me.antileaf.midori.actions.common.FilteredDrawCardAction;
 import me.antileaf.midori.actions.utils.AnonymousAction;
 import me.antileaf.midori.cards.AbstractMidoriCard;
 import me.antileaf.midori.hue.Hue;
@@ -26,9 +19,8 @@ public class Resonance extends AbstractMidoriCard {
 	private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
 
 	private static final int COST = 1;
-	private static final int MAGIC = 2;
-	private static final int DAMAGE = 12;
-	private static final int UPGRADE_PLUS_DMG = 4;
+	private static final int BLOCK = 9;
+	private static final int UPGRADE_PLUS_BLOCK = 3;
 
 	public Resonance() {
 		super(
@@ -39,27 +31,29 @@ public class Resonance extends AbstractMidoriCard {
 				cardStrings.DESCRIPTION,
 				CardType.SKILL,
 				CardColorEnum.MIDORI_COLOR,
-				CardRarity.COMMON,
-				CardTarget.ALL_ENEMY
+				CardRarity.UNCOMMON,
+				CardTarget.SELF
 		);
 
-		this.magicNumber = this.baseMagicNumber = MAGIC;
-		this.damage = this.baseDamage = DAMAGE;
-		this.isMultiDamage = true;
+		this.block = this.baseBlock = BLOCK;
 	}
 
 	@Override
 	public void use(AbstractPlayer p, AbstractMonster m) {
-		this.addToBot(new FilteredDrawCardAction(this.magicNumber,
-				c -> c.type == CardType.ATTACK,
-				true,
-				new AnonymousAction(() -> {
-					if (FilteredDrawCardAction.drawnCards.stream()
-							.allMatch(c -> HueManager.hasHue(c, Hue.LAVA)))
-						this.addToTop(new DamageAllEnemiesAction(p,
-								this.multiDamage, this.damageTypeForTurn,
-								AbstractGameAction.AttackEffect.BLUNT_LIGHT));
-				})));
+		this.addToBot(new GainBlockAction(p, p, this.block));
+
+		this.addToBot(new AnonymousAction(() -> {
+			p.hand.group.stream()
+					.filter(c -> HueManager.hasHue(c, Hue.SKY))
+					.forEach(c -> {
+						if (c.costForTurn != 1 || c.cost != 1) {
+							c.costForTurn = c.cost = 1;
+							c.isCostModified = true;
+						}
+
+						c.freeToPlayOnce = false;
+					});
+		}));
 	}
 
 	@Override
@@ -71,7 +65,7 @@ public class Resonance extends AbstractMidoriCard {
 	public void upgrade() {
 		if (!this.upgraded) {
 			this.upgradeName();
-			this.upgradeDamage(UPGRADE_PLUS_DMG);
+			this.upgradeBlock(UPGRADE_PLUS_BLOCK);
 			this.initializeDescription();
 		}
 	}

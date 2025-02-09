@@ -58,61 +58,81 @@ public class VineWinding extends AbstractMidoriCard {
 		choices.add(new YesChoice());
 		choices.add(new NoChoice());
 
-		if (!HueManager.hasAnyHue(this))
-			this.addToBot(new ChooseOneCallbackAction(
-					choices,
-					chosen -> {
-						if (chosen instanceof YesChoice)
-							this.addToTop(new FilteredDrawCardAction(
-									VineWinding.this.magicNumber,
-									card -> !HueManager.hasAnyHue(card),
-									true,
-									null));
-						else
-							this.addToTop(new FilteredDrawCardAction(
-									VineWinding.this.magicNumber,
-									HueManager::hasAnyHue,
-									true,
-									null));
-					},
-					cardStrings.EXTENDED_DESCRIPTION[0],
-					false
-			));
-		else {
-			boolean[] has = new boolean[Hue.values().length];
-			for (Hue hue : Hue.values())
-				has[hue.ordinal()] = HueManager.hasHue(this, hue);
+		this.addToBot(new ChooseOneCallbackAction(
+				choices,
+				chosen -> {
+					if (chosen instanceof YesChoice)
+						this.addToTop(new FilteredDrawCardAction(
+								VineWinding.this.magicNumber,
+								card -> HueManager.sameHue(this, card),
+								true,
+								null));
+					else
+						this.addToTop(new FilteredDrawCardAction(
+								VineWinding.this.magicNumber,
+								card -> HueManager.differentHue(this, card),
+								true,
+								null));
+				},
+				cardStrings.EXTENDED_DESCRIPTION[0],
+				false
+		));
 
-			this.addToBot(new ChooseOneCallbackAction(
-					choices,
-					chosen -> {
-						if (chosen instanceof YesChoice)
-							this.addToTop(new FilteredDrawCardAction(
-									VineWinding.this.magicNumber,
-									card -> {
-										for (Hue hue : Hue.values())
-											if (has[hue.ordinal()] && HueManager.hasHue(card, hue))
-												return true;
-										return false;
-									},
-									true,
-									null));
-						else
-							this.addToTop(new FilteredDrawCardAction(
-									VineWinding.this.magicNumber,
-									card -> {
-										for (Hue hue : Hue.values())
-											if (has[hue.ordinal()] != HueManager.hasHue(card, hue))
-												return true;
-										return false;
-									},
-									true,
-									null));
-					},
-					cardStrings.EXTENDED_DESCRIPTION[0],
-					false
-			));
-		}
+//		if (!HueManager.hasAnyHue(this))
+//			this.addToBot(new ChooseOneCallbackAction(
+//					choices,
+//					chosen -> {
+//						if (chosen instanceof YesChoice)
+//							this.addToTop(new FilteredDrawCardAction(
+//									VineWinding.this.magicNumber,
+//									card -> !HueManager.hasAnyHue(card),
+//									true,
+//									null));
+//						else
+//							this.addToTop(new FilteredDrawCardAction(
+//									VineWinding.this.magicNumber,
+//									HueManager::hasAnyHue,
+//									true,
+//									null));
+//					},
+//					cardStrings.EXTENDED_DESCRIPTION[0],
+//					false
+//			));
+//		else {
+//			boolean[] has = new boolean[Hue.values().length];
+//			for (Hue hue : Hue.values())
+//				has[hue.ordinal()] = HueManager.hasHue(this, hue);
+//
+//			this.addToBot(new ChooseOneCallbackAction(
+//					choices,
+//					chosen -> {
+//						if (chosen instanceof YesChoice)
+//							this.addToTop(new FilteredDrawCardAction(
+//									VineWinding.this.magicNumber,
+//									card -> {
+//										for (Hue hue : Hue.values())
+//											if (has[hue.ordinal()] && HueManager.hasHue(card, hue))
+//												return true;
+//										return false;
+//									},
+//									true,
+//									null));
+//						else
+//							this.addToTop(new FilteredDrawCardAction(
+//									VineWinding.this.magicNumber,
+//									card -> {
+//										for (Hue hue : Hue.values())
+//											if (has[hue.ordinal()] != HueManager.hasHue(card, hue))
+//												return true;
+//										return false;
+//									},
+//									true,
+//									null));
+//					},
+//					cardStrings.EXTENDED_DESCRIPTION[0],
+//					false
+//			));
+//		}
 	}
 
 	@Override

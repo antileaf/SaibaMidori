@@ -46,7 +46,11 @@ public class CrimsonImpact extends AbstractMidoriCard {
 
 	@Override
 	public void applyPowersToBlock() {
-		this.magicNumber = this.baseMagicNumber = (int)AbstractDungeon.player.hand.group.stream().filter(c -> HueManager.hasHue(c, Hue.LAVA)).count();
+		this.magicNumber = this.baseMagicNumber =
+				(int)AbstractDungeon.player.hand.group.stream()
+						.filter(c -> HueManager.hasHue(c, Hue.LAVA))
+						.filter(c -> c != this)
+						.count();
 
 		super.applyPowersToBlock();
 
@@ -62,10 +66,14 @@ public class CrimsonImpact extends AbstractMidoriCard {
 
 	@Override
 	public void use(AbstractPlayer p, AbstractMonster m) {
-		int count = (int)p.hand.group.stream().filter(c -> HueManager.hasHue(c, Hue.LAVA)).count();
+		int count = (int)p.hand.group.stream()
+				.filter(c -> HueManager.hasHue(c, Hue.LAVA))
+				.filter(c -> c != this)
+				.count();
 
 		p.hand.group.stream()
 				.filter(c -> HueManager.hasHue(c, Hue.LAVA))
+				.filter(c -> c != this)
 				.forEach(c -> {
 					addToBot(new RemoveHueAction(c));
 					addToBot(new DamageAction(m, new DamageInfo(p, this.damage, this.damageTypeForTurn),

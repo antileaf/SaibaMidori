@@ -1,5 +1,6 @@
 package me.antileaf.midori.powers.unique;
 
+import com.evacipated.cardcrawl.mod.stslib.patches.NeutralPowertypePatch;
 import com.megacrit.cardcrawl.actions.common.GainEnergyAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -59,29 +60,5 @@ public class PaintingsPower extends AbstractMidoriPower {
 
 			logger.info("count = {}, amount = {}", count, this.amount);
 		}));
-	}
-
-	@Override
-	public void atEndOfTurn(boolean isPlayer) {
-		if (isPlayer) {
-			boolean[] tbl = new boolean[Hue.values().length];
-
-			for (AbstractCard c : AbstractDungeon.player.hand.group) {
-				Hue hue = HueManager.getHue(c);
-				if (hue != null)
-					tbl[hue.ordinal()] = true;
-			}
-
-			int count = 0;
-			for (int i = 0; i < tbl.length; i++)
-				count += tbl[i] ? 1 : 0;
-
-			if (count >= 7) {
-				this.flash();
-				this.addToBot(new AnonymousAction(() -> {
-					AbstractDungeon.getCurrRoom().endBattle();
-				}));
-			}
-		}
 	}
 }

@@ -1,4 +1,4 @@
-package me.antileaf.midori.relics.midori;
+package me.antileaf.midori.relics.deprecated;
 
 import basemod.AutoAdd;
 import basemod.abstracts.CustomRelic;

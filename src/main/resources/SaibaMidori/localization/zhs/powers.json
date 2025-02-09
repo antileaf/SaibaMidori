@@ -36,6 +36,13 @@
     ]
   },
 
+  "SaibaMidori:PaintingsPlusPower": {
+    "NAME": "青空彩绘+",
+    "DESCRIPTIONS": [
+      "如果在回合结束时手牌中有七种不同 #y颜色 的牌，获得本场战斗的胜利。"
+    ]
+  },
+
   "SaibaMidori:ShadePower": {
     "NAME": "荫蔽",
     "DESCRIPTIONS": [
@@ -181,6 +188,13 @@
     "NAME": "扭曲学识",
     "DESCRIPTIONS": [
       "抽到 #b%d 张不为 [#5b9bd5]蓝色[] 的牌后，失去 #b%d 点 #y力量 。"
+    ]
+  },
+
+  "SaibaMidori:LessDrawPower": {
+    "NAME": "抽牌减少",
+    "DESCRIPTIONS": [
+      "下回合少抽 #b%d 张牌。"
     ]
   }
 }

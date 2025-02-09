@@ -200,10 +200,6 @@ public class MidoriCore implements
 	@Override
 	public void receivePostInitialize() {
 		HueRenderHelper.initialize();
-
-		logger.info("basemod: {}", WorkshopHelper.isModInWorkshop("basemod"));
-		logger.info("tuner: {}", WorkshopHelper.isModInWorkshop("Blue archive Hina mod"));
-		logger.info("SaibaMidori: {}", WorkshopHelper.isModInWorkshop("SaibaMidori"));
 	}
 
 	@Override

@@ -47,7 +47,7 @@ public class HiddenMeaningPower extends AbstractMidoriPower {
 
 					this.addToBot(new DamageAllEnemiesAction(
 							AbstractDungeon.player,
-							this.amount,
+							DamageInfo.createDamageMatrix(this.amount, true),
 							DamageInfo.DamageType.THORNS,
 							AbstractGameAction.AttackEffect.BLUNT_LIGHT
 					));

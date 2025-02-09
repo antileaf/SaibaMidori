@@ -11,6 +11,15 @@
     "NAME": "画板",
     "FLAVOR": "画师的得力助手。",
     "DESCRIPTIONS": [
+      "你在回合结束时可以选择 #y保留 最多 #b2 张牌，下回合少抽等量的牌。",
+      "保留，下回合少抽等量牌"
+    ]
+  },
+
+  "SaibaMidori:DrawingBoard_Old": {
+    "NAME": "画板",
+    "FLAVOR": "画师的得力助手。",
+    "DESCRIPTIONS": [
       "每场战斗开始时，将一张 #y颜料 加入手牌。"
     ]
   }

@@ -109,6 +109,28 @@ public abstract class HueManager {
 		return getHue(card) != null || hasAllHues(card);
 	}
 
+	public static boolean sameHue(AbstractCard a, AbstractCard b) {
+		if (!hasAnyHue(a))
+			return !hasAnyHue(b);
+
+		for (Hue hue : Hue.values())
+			if (hasHue(a, hue) && hasHue(b, hue))
+				return true;
+
+		return false;
+	}
+
+	public static boolean differentHue(AbstractCard a, AbstractCard b) {
+		if (!hasAnyHue(a))
+			return hasAnyHue(b);
+
+		for (Hue hue : Hue.values())
+			if (hasHue(a, hue) != hasHue(b, hue))
+				return true;
+
+		return false;
+	}
+
 	public static Hue getFixedHue(AbstractCard card) {
 		if (card instanceof AbstractMidoriCard)
 			return ((AbstractMidoriCard) card).fixedHue;
@@ -193,9 +215,9 @@ public abstract class HueManager {
 			if (original != null && original != hue) {
 				remove(card);
 
-				if (hue == Hue.POMELO) // 橙色：覆盖其它颜色时获得 3 点活力
+				if (hue == Hue.POMELO) // 橙色：覆盖其它颜色时获得 4 点活力
 					MidoriHelper.addToBot(new ApplyPowerAction(AbstractDungeon.player,
-							AbstractDungeon.player, new VigorPower(AbstractDungeon.player, 3)));
+							AbstractDungeon.player, new VigorPower(AbstractDungeon.player, 4)));
 			}
 
 			setHue(card, hue);

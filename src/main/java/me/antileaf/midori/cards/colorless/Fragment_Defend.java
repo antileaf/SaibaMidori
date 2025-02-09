@@ -1,63 +1,57 @@
-package me.antileaf.midori.cards.midori;
+package me.antileaf.midori.cards.colorless;
 
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.actions.common.DamageAction;
+import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.powers.BerserkPower;
-import com.megacrit.cardcrawl.powers.DrawPower;
 import me.antileaf.midori.cards.AbstractMidoriCard;
-import me.antileaf.midori.hue.Hue;
-import me.antileaf.midori.hue.HueManager;
-import me.antileaf.midori.patches.enums.CardColorEnum;
-import me.antileaf.midori.powers.unique.MechanicalMindPower;
 import me.antileaf.midori.utils.MidoriHelper;
 
-public class MechanicalMind extends AbstractMidoriCard {
-	public static final String SIMPLE_NAME = MechanicalMind.class.getSimpleName();
+public class Fragment_Defend extends AbstractMidoriCard {
+	public static final String SIMPLE_NAME = Fragment_Defend.class.getSimpleName();
 	public static final String ID = MidoriHelper.makeID(SIMPLE_NAME);
 	private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
 
-	private static final int COST = 3;
+	private static final int COST = 1;
+	private static final int BLOCK = 12;
+	private static final int UPGRADE_PLUS_BLOCK = 3;
 
-	public MechanicalMind() {
+	public Fragment_Defend() {
 		super(
 				ID,
 				cardStrings.NAME,
 				null, // MidoriHelper.getCardImgFilePath(SIMPLE_NAME),
 				COST,
 				cardStrings.DESCRIPTION,
-				CardType.POWER,
-				CardColorEnum.MIDORI_COLOR,
-				CardRarity.RARE,
+				CardType.SKILL,
+				CardColor.COLORLESS,
+				CardRarity.SPECIAL,
 				CardTarget.SELF
 		);
 
-		this.isEthereal = true;
-
-		this.fixedHue = Hue.SKY;
+		this.block = this.baseBlock = BLOCK;
 	}
 
 	@Override
 	public void use(AbstractPlayer p, AbstractMonster m) {
-		this.addToBot(new ApplyPowerAction(p, p, new MechanicalMindPower(1)));
+		this.addToBot(new GainBlockAction(p, p, this.block));
 	}
 
 	@Override
 	public AbstractCard makeCopy() {
-		return new MechanicalMind();
+		return new Fragment_Defend();
 	}
 
 	@Override
 	public void upgrade() {
 		if (!this.upgraded) {
 			this.upgradeName();
-
-			this.isEthereal = false;
-			this.rawDescription = cardStrings.UPGRADE_DESCRIPTION;
-
+			this.upgradeBlock(UPGRADE_PLUS_BLOCK);
 			this.initializeDescription();
 		}
 	}

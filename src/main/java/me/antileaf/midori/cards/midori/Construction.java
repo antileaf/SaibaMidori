@@ -1,8 +1,10 @@
 package me.antileaf.midori.cards.midori;
 
+import com.evacipated.cardcrawl.mod.stslib.fields.cards.AbstractCard.PersistFields;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.actions.common.GainEnergyAction;
+import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
 import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -15,6 +17,7 @@ import com.megacrit.cardcrawl.orbs.Frost;
 import com.megacrit.cardcrawl.relics.PrismaticShard;
 import me.antileaf.midori.actions.common.ChooseOneCallbackAction;
 import me.antileaf.midori.actions.common.FilteredDrawCardAction;
+import me.antileaf.midori.actions.hue.PaintAction;
 import me.antileaf.midori.actions.utils.AnonymousAction;
 import me.antileaf.midori.cards.AbstractMidoriCard;
 import me.antileaf.midori.cards.colorless.BreakChoice;
@@ -31,9 +34,9 @@ public class Construction extends AbstractMidoriCard {
 	public static final String ID = MidoriHelper.makeID(SIMPLE_NAME);
 	private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
 
-	private static final int COST = 1;
-	private static final int MAGIC = 1;
-	private static final int UPGRADE_PLUS_MAGIC = 1;
+	private static final int COST = 0;
+	private static final int MAGIC = 3;
+	private static final int PERSIST = 2;
 
 	public Construction() {
 		super(
@@ -77,12 +80,33 @@ public class Construction extends AbstractMidoriCard {
 //					false));
 //		}
 
-		ArrayList<AbstractCard> choices = CardLibrary.getAllCards().stream()
+		ArrayList<AbstractCard> list = CardLibrary.getAllCards().stream()
 				.filter(c -> c.rarity != CardRarity.BASIC &&
 						c.rarity != CardRarity.SPECIAL && c.rarity != CardRarity.CURSE)
 				.filter(c -> p.hasRelic(PrismaticShard.ID) || c.color == p.getCardColor())
 				.filter(c -> c.cost == 2)
 				.collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
+
+		ArrayList<AbstractCard> choices = new ArrayList<>();
+		for (int i = 0; i < this.magicNumber; i++) {
+			AbstractCard card = list.get(AbstractDungeon.cardRandomRng.random(list.size() - 1));
+			choices.add(card);
+			list.remove(card);
+		}
+
+		this.addToBot(new ChooseOneCallbackAction(choices,
+				card -> {
+			AbstractCard copy = card.makeCopy();
+			this.addToBot(new MakeTempCardInHandAction(copy, true, true));
+			this.addToBot(new AnonymousAction(() -> {
+				this.addToTop(new PaintAction(Hue.SKY, p.hand.group.stream()
+						.filter(c -> c.uuid.equals(copy.uuid))
+						.findFirst().orElse(null)));
+			}));
+				},
+				cardStrings.EXTENDED_DESCRIPTION[0],
+				true,
+				true));
 	}
 
 	@Override
@@ -95,8 +119,8 @@ public class Construction extends AbstractMidoriCard {
 		if (!this.upgraded) {
 			this.upgradeName();
 
-//			this.rawDescription = cardStrings.UPGRADE_DESCRIPTION;
-			this.upgradeMagicNumber(UPGRADE_PLUS_MAGIC);
+			this.rawDescription = cardStrings.UPGRADE_DESCRIPTION;
+			PersistFields.persist.set(this, PERSIST);
 
 			this.initializeDescription();
 		}

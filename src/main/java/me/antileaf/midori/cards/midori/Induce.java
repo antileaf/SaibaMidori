@@ -1,5 +1,6 @@
 package me.antileaf.midori.cards.midori;
 
+import basemod.helpers.TooltipInfo;
 import com.megacrit.cardcrawl.actions.GameActionManager;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
@@ -14,6 +15,9 @@ import me.antileaf.midori.cards.AbstractMidoriCard;
 import me.antileaf.midori.hue.Hue;
 import me.antileaf.midori.patches.enums.CardColorEnum;
 import me.antileaf.midori.utils.MidoriHelper;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Induce extends AbstractMidoriCard {
 	public static final String SIMPLE_NAME = Induce.class.getSimpleName();
@@ -38,6 +42,14 @@ public class Induce extends AbstractMidoriCard {
 		);
 
 		this.magicNumber = this.baseMagicNumber = MAGIC;
+	}
+
+	@Override
+	public List<TooltipInfo> getCustomTooltips() {
+		ArrayList<TooltipInfo> tips = new ArrayList<>();
+		tips.add(new TooltipInfo(cardStrings.EXTENDED_DESCRIPTION[0],
+				cardStrings.EXTENDED_DESCRIPTION[1]));
+		return tips;
 	}
 
 	@Override

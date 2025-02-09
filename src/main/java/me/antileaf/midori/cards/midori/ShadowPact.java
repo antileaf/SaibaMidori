@@ -1,7 +1,10 @@
 package me.antileaf.midori.cards.midori;
 
+import com.evacipated.cardcrawl.mod.stslib.actions.common.SelectCardsInHandAction;
+import com.megacrit.cardcrawl.actions.GameActionManager;
 import com.megacrit.cardcrawl.actions.common.DiscardAction;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
+import com.megacrit.cardcrawl.actions.common.GainEnergyAction;
 import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -18,6 +21,8 @@ import me.antileaf.midori.hue.Hue;
 import me.antileaf.midori.hue.HueManager;
 import me.antileaf.midori.patches.enums.CardColorEnum;
 import me.antileaf.midori.utils.MidoriHelper;
+
+import java.util.ArrayList;
 
 public class ShadowPact extends AbstractMidoriCard {
 	public static final String SIMPLE_NAME = ShadowPact.class.getSimpleName();
@@ -46,17 +51,24 @@ public class ShadowPact extends AbstractMidoriCard {
 
 	@Override
 	public void use(AbstractPlayer p, AbstractMonster m) {
-		this.addToBot(new DiscardAction(p, p, this.magicNumber, false));
-		this.addToBot(new AnonymousAction(() -> {
-			MidoriHelper.addActionToBuffer(new DrawCardAction(AbstractDungeon.handCardSelectScreen.selectedCards.group.size()));
+		this.addToBot(new SelectCardsInHandAction(this.magicNumber, cardStrings.EXTENDED_DESCRIPTION[0],
+				cards -> {
+			final ArrayList<AbstractCard> finalCards = new ArrayList<>(cards);
 
-			for (AbstractCard c : AbstractDungeon.handCardSelectScreen.selectedCards.group)
-				if (HueManager.hasHue(c, Hue.INK)) {
-					MidoriHelper.addActionToBuffer(new RemoveHueAction(c));
-					MidoriHelper.addActionToBuffer(new ChannelAction(new Dark()));
-				}
+			this.addToTop(new AnonymousAction(() -> {
+				if (finalCards.stream().anyMatch(c -> HueManager.hasHue(c, Hue.INK)))
+					this.addToTop(new GainEnergyAction(1));
 
-			MidoriHelper.commitBuffer();
+				this.addToTop(new DrawCardAction(finalCards.size()));
+
+				this.addToTop(new AnonymousAction(() -> {
+					finalCards.forEach(c -> {
+						p.hand.moveToDiscardPile(c);
+						c.triggerOnManualDiscard();
+						GameActionManager.incrementDiscard(false);
+					});
+				}));
+			}));
 		}));
 	}
 

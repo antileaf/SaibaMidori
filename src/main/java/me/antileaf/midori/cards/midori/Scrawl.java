@@ -20,8 +20,9 @@ public class Scrawl extends AbstractMidoriCard {
 	private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
 
 	private static final int COST = 1;
+	private static final int UPGRADED_COST = 0;
 	private static final int MAGIC = 2;
-	private static final int UPGRADE_PLUS_MAGIC = 1;
+//	private static final int UPGRADE_PLUS_MAGIC = 1;
 
 	public Scrawl() {
 		super(
@@ -58,7 +59,8 @@ public class Scrawl extends AbstractMidoriCard {
 	public void upgrade() {
 		if (!this.upgraded) {
 			this.upgradeName();
-			this.upgradeMagicNumber(UPGRADE_PLUS_MAGIC);
+			this.upgradeBaseCost(UPGRADED_COST);
+//			this.upgradeMagicNumber(UPGRADE_PLUS_MAGIC);
 			this.initializeDescription();
 		}
 	}

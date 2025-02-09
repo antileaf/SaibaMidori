@@ -19,9 +19,7 @@ public class Communicate extends AbstractMidoriCard {
 	private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
 
 	private static final int COST = 1;
-	private static final int UPGRADED_COST = 0;
 	private static final int MAGIC = 3;
-	private static final int UPGRADE_PLUS_MAGIC = -1;
 
 	public Communicate() {
 		super(
@@ -44,20 +42,32 @@ public class Communicate extends AbstractMidoriCard {
 		if (!super.canUse(p, m))
 			return false;
 
-		boolean mint = false, sky = false;
+		boolean mint = false, sky = false, other = false;
 		for (AbstractCard c : p.hand.group) {
 			if (HueManager.hasHue(c, Hue.MINT))
 				mint = true;
 			if (HueManager.hasHue(c, Hue.SKY))
 				sky = true;
+
+			for (Hue h : Hue.values())
+				if (h != Hue.MINT && h != Hue.SKY && HueManager.hasHue(c, h)) {
+					other = true;
+					break;
+				}
+
+			other |= !HueManager.hasAnyHue(c);
 		}
 
 		if (!(mint && sky)) {
 			this.cantUseMessage = cardStrings.EXTENDED_DESCRIPTION[0];
 			return false;
 		}
-		else
-			return true;
+		else if (!this.upgraded && other) {
+			this.cantUseMessage = cardStrings.EXTENDED_DESCRIPTION[1];
+			return false;
+		}
+
+		return true;
 	}
 
 	@Override
@@ -75,8 +85,6 @@ public class Communicate extends AbstractMidoriCard {
 		if (!this.upgraded) {
 			this.upgradeName();
 
-			this.upgradeBaseCost(UPGRADED_COST);
-			this.upgradeMagicNumber(UPGRADE_PLUS_MAGIC);
 			this.rawDescription = cardStrings.UPGRADE_DESCRIPTION;
 
 			this.initializeDescription();

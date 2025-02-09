@@ -1,26 +1,28 @@
 package me.antileaf.midori.cards.midori;
 
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
-import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.orbs.Frost;
-import com.megacrit.cardcrawl.orbs.Lightning;
+import me.antileaf.midori.actions.utils.AnonymousAction;
 import me.antileaf.midori.cards.AbstractMidoriCard;
+import me.antileaf.midori.hue.Hue;
+import me.antileaf.midori.hue.HueManager;
 import me.antileaf.midori.patches.enums.CardColorEnum;
 import me.antileaf.midori.utils.MidoriHelper;
 
-public class Balance extends AbstractMidoriCard {
-	public static final String SIMPLE_NAME = Balance.class.getSimpleName();
+public class Scatter extends AbstractMidoriCard {
+	public static final String SIMPLE_NAME = Scatter.class.getSimpleName();
 	public static final String ID = MidoriHelper.makeID(SIMPLE_NAME);
 	private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
 
-	private static final int COST = 1;
+	private static final int COST = 4;
+	private static final int BLOCK = 12;
+	private static final int UPGRADE_PLUS_BLOCK = 4;
 
-	public Balance() {
+	public Scatter() {
 		super(
 				ID,
 				cardStrings.NAME,
@@ -30,31 +32,38 @@ public class Balance extends AbstractMidoriCard {
 				CardType.SKILL,
 				CardColorEnum.MIDORI_COLOR,
 				CardRarity.COMMON,
-				CardTarget.NONE
+				CardTarget.SELF
 		);
 
-		this.isEthereal = true;
+		this.block = this.baseBlock = BLOCK;
+	}
+
+	@Override
+	public void triggerOnCardPlayed(AbstractCard c) {
+		if (HueManager.hasHue(c, Hue.MINT))
+			this.updateCost(-1);
 	}
 
 	@Override
 	public void use(AbstractPlayer p, AbstractMonster m) {
-		this.addToBot(new ChannelAction(new Lightning()));
-		this.addToBot(new ChannelAction(new Frost()));
+		this.addToBot(new GainBlockAction(p, p, this.block));
+
+		this.addToBot(new AnonymousAction(() -> {
+			this.cost = this.costForTurn = COST;
+			this.isCostModified = false;
+		}));
 	}
 
 	@Override
 	public AbstractCard makeCopy() {
-		return new Balance();
+		return new Scatter();
 	}
 
 	@Override
 	public void upgrade() {
 		if (!this.upgraded) {
 			this.upgradeName();
-
-			this.isEthereal = false;
-			this.rawDescription = cardStrings.UPGRADE_DESCRIPTION;
-
+			this.upgradeBlock(UPGRADE_PLUS_BLOCK);
 			this.initializeDescription();
 		}
 	}

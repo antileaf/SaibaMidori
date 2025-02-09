@@ -1,4 +1,4 @@
-package me.antileaf.midori.cards.colorless;
+package me.antileaf.midori.cards.deprecated.colorless;
 
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -8,8 +8,8 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import me.antileaf.midori.cards.AbstractMidoriCard;
 import me.antileaf.midori.utils.MidoriHelper;
 
-public class GoWithRed extends AbstractMidoriCard {
-	public static final String SIMPLE_NAME = GoWithRed.class.getSimpleName();
+public class GoWithGreen extends AbstractMidoriCard {
+	public static final String SIMPLE_NAME = GoWithGreen.class.getSimpleName();
 	public static final String ID = MidoriHelper.makeID(SIMPLE_NAME);
 	private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
 
@@ -19,7 +19,7 @@ public class GoWithRed extends AbstractMidoriCard {
 
 	private int count = -1;
 
-	public GoWithRed() {
+	public GoWithGreen() {
 		super(
 				ID,
 				cardStrings.NAME,
@@ -37,7 +37,7 @@ public class GoWithRed extends AbstractMidoriCard {
 //		this.magicNumber = this.baseMagicNumber = MAGIC;
 	}
 
-	public GoWithRed(int count) {
+	public GoWithGreen(int count) {
 		this();
 		this.count = count;
 		this.initializeDescription();
@@ -58,7 +58,7 @@ public class GoWithRed extends AbstractMidoriCard {
 
 	@Override
 	public AbstractCard makeCopy() {
-		return new GoWithRed();
+		return new GoWithGreen();
 	}
 
 	@Override

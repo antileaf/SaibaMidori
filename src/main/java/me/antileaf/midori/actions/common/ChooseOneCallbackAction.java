@@ -17,10 +17,11 @@ public class ChooseOneCallbackAction extends AbstractGameAction {
 	private final Consumer<AbstractCard> consumer;
 	private final String text;
 	private final boolean masterReality;
+	private final boolean skippable;
 	private boolean selected = false;
 
 	public ChooseOneCallbackAction(Supplier<ArrayList<AbstractCard>> supplier, Consumer<AbstractCard> consumer,
-								   String text, boolean masterReality) {
+								   String text, boolean masterReality, boolean skippable) {
 		this.actionType = ActionType.CARD_MANIPULATION;
 		this.duration = DURATION;
 
@@ -28,11 +29,22 @@ public class ChooseOneCallbackAction extends AbstractGameAction {
 		this.consumer = consumer;
 		this.text = text;
 		this.masterReality = masterReality;
+		this.skippable = skippable;
+	}
+
+	public ChooseOneCallbackAction(ArrayList<AbstractCard> cards, Consumer<AbstractCard> consumer,
+								   String text, boolean masterReality, boolean skippable) {
+		this(() -> cards, consumer, text, masterReality, skippable);
+	}
+
+	public ChooseOneCallbackAction(Supplier<ArrayList<AbstractCard>> supplier, Consumer<AbstractCard> consumer,
+								   String text, boolean masterReality) {
+		this(supplier, consumer, text, masterReality, false);
 	}
 
 	public ChooseOneCallbackAction(ArrayList<AbstractCard> cards, Consumer<AbstractCard> consumer,
 								   String text, boolean masterReality) {
-		this(() -> cards, consumer, text, masterReality);
+		this(cards, consumer, text, masterReality, false);
 	}
 	
 	public void update() {
@@ -54,7 +66,7 @@ public class ChooseOneCallbackAction extends AbstractGameAction {
 				return;
 			}
 			
-			AbstractDungeon.cardRewardScreen.customCombatOpen(cards, text, false);
+			AbstractDungeon.cardRewardScreen.customCombatOpen(cards, text, this.skippable);
 			this.tickDuration();
 		}
 		else {
